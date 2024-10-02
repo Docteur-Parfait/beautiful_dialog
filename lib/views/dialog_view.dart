@@ -16,7 +16,8 @@ class _DialogViewState extends State<DialogView> {
         appBar: AppBar(
           title: const Text("Flutter Beautiful Dialogs"),
         ),
-        body: Padding(
+        body: SingleChildScrollView(
+            child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Wrap(
             children: [
@@ -40,6 +41,6 @@ class _DialogViewState extends State<DialogView> {
               ),
             ],
           ),
-        ));
+        )));
   }
 }
