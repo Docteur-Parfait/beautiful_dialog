@@ -14,11 +14,9 @@ jobs:
     - name: Check out the repository
       uses: actions/checkout@v2
       
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: 'latest'
-
+    - name: Flutter action
+      uses: subosito/flutter-action@v2.14.0
+      
     - name: Install dependencies
       run: flutter pub get
 
