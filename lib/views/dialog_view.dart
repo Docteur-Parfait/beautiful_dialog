@@ -76,7 +76,8 @@ class _DialogViewState extends State<DialogView> {
                 author: "Just2sire",
                 onTap: () => DialogClass.showSuccessDialog(
                   context,
-                  message: "Congrats! You will now enjoy our new updates for next year.",
+                  message:
+                      "Congrats! You will now enjoy our new updates for next year.",
                 ),
               ),
               CustomButton(
@@ -85,6 +86,14 @@ class _DialogViewState extends State<DialogView> {
                 onTap: () => DialogClass.showExpandingDialog(
                   context,
                   message: "Try to close it at first try.",
+                ),
+              ),
+              CustomButton(
+                text: "Comrade is there...",
+                author: "agnilondapakou",
+                onTap: () => DialogClass.comradeIsThere(
+                  context,
+                  message: "Are you happy to hear about that ?",
                 ),
               ),
             ],
