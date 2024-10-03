@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/dodge_button_dialog.dart';
+import '../widgets/expanding_dialog.dart';
 
 class DialogClass {
   // add your dialog here as a static method
@@ -168,7 +168,7 @@ class DialogClass {
       },
     );
   }
-  static void showDodgeButtonDialog(
+  static void showExpandingDialog(
       BuildContext context, {
         required String message,
       }) {
@@ -178,7 +178,7 @@ class DialogClass {
       barrierLabel: "Dismiss",
       transitionDuration: const Duration(milliseconds: 400),
       pageBuilder: (context, anim1, anim2) {
-        return DodgeButtonDialog(message: message); // Utilise le widget externe
+        return ExpandingDialog(message: message);
       },
       transitionBuilder: (context, anim1, anim2, child) {
         return Transform.scale(

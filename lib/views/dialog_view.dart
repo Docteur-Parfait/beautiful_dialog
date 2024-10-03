@@ -80,9 +80,9 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
-                text: "Dodge alert",
+                text: "Expanding alert",
                 author: "littleDarkBug",
-                onTap: () => DialogClass.showSuccessDialog(
+                onTap: () => DialogClass.showExpandingDialog(
                   context,
                   message: "Try to close it at first try.",
                 ),
