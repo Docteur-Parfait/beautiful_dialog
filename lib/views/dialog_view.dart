@@ -79,6 +79,14 @@ class _DialogViewState extends State<DialogView> {
                   message: "Congrats! You will now enjoy our new updates for next year.",
                 ),
               ),
+              CustomButton(
+                text: "Dodge alert",
+                author: "littleDarkBug",
+                onTap: () => DialogClass.showSuccessDialog(
+                  context,
+                  message: "Try to close it at first try.",
+                ),
+              ),
             ],
           ),
         ),
