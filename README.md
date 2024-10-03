@@ -4,13 +4,15 @@
 
 Welcome to **Beautiful Dialogs**, a Flutter open-source project where developers can contribute by adding beautiful dialog widgets! 🌟
 
+Explore a live demo of the dialogs [here](https://beautiful-dialogs.netlify.app/) to see the magic in action! ✨
+
 ## Getting Started
 
 To contribute to this project, follow these simple steps:
 
 ### 1. Fork the repository and don't forget to add a star ⭐
 
-Go to the [repository](https://github.com/Docteur-Parfait/beautiful_dialog.git) and click the **Fork** button. Remember to star the project to show your support!
+Head over to the [repository](https://github.com/Docteur-Parfait/beautiful_dialog.git) and click the **Fork** button. Don’t forget to star the project as a token of appreciation!
 
 ### 2. Clone the repository
 
@@ -23,7 +25,7 @@ cd beautiful_dialog
 
 ### 3. Create a new branch
 
-Create a new branch where you can add your dialog:
+Create a new branch for your custom dialog:
 
 ```bash
 git checkout -b your-branch-name
@@ -31,7 +33,7 @@ git checkout -b your-branch-name
 
 ### 4. Add your custom dialog
 
-In the code, navigate to the file `lib/dialogs/dialog_class.dart`. This is where you will add your custom dialog function. For example:
+In the code, navigate to `lib/dialogs/dialog_class.dart`. This is where you can add your custom dialog function. For example:
 
 ```dart
 static void showDangerAlertDialog(BuildContext context,
@@ -81,7 +83,7 @@ CustomButton(
 
 ### 6. Commit, push, and submit a pull request
 
-After adding your dialog, commit your changes:
+Once you've added your dialog, commit your changes:
 
 ```bash
 git add .
@@ -89,11 +91,18 @@ git commit -m "Added new custom dialog"
 git push origin your-branch-name
 ```
 
-Then, open a pull request from your forked repository.
+Now, open a pull request from your forked repository.
 
 ## Contribution Guidelines
 
 - Contributions must only involve adding new dialogs.
-- Respect the code structure and the contribution process as described.
+- Ensure the code structure and format is respected.
+- Test your dialog before submitting the PR.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
 
 Happy coding and thank you for contributing to **Beautiful Dialogs**! 😄

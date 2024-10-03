@@ -15,6 +15,23 @@ class _DialogViewState extends State<DialogView> {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Flutter Beautiful Dialogs"),
+          actions: [
+            Container(
+              height: 40,
+              margin: const EdgeInsets.only(right: 12),
+              child: Row(children: [
+                Image.asset(
+                  "assets/github.png",
+                  height: 30,
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                const Text("Contribute",
+                    style: TextStyle(fontSize: 16, color: Colors.white))
+              ]),
+            )
+          ],
         ),
         body: SingleChildScrollView(
             child: Padding(
