@@ -168,10 +168,11 @@ class DialogClass {
       },
     );
   }
+
   static void showExpandingDialog(
-      BuildContext context, {
-        required String message,
-      }) {
+    BuildContext context, {
+    required String message,
+  }) {
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
