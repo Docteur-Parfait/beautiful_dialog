@@ -1,8 +1,7 @@
-import 'dart:js' as js;
-
 import 'package:beautiful_dialog/dialogs/dialog_class.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DialogView extends StatefulWidget {
   const DialogView({super.key});
@@ -12,6 +11,12 @@ class DialogView extends StatefulWidget {
 }
 
 class _DialogViewState extends State<DialogView> {
+  Future<void> _launchUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,8 +25,8 @@ class _DialogViewState extends State<DialogView> {
         actions: [
           GestureDetector(
             onTap: () {
-              js.context.callMethod('open',
-                  ['https://github.com/Docteur-Parfait/beautiful_dialog.git']);
+              _launchUrl(
+                  'https://github.com/Docteur-Parfait/beautiful_dialog.git');
             },
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
