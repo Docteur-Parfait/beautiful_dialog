@@ -1,3 +1,5 @@
+import 'dart:js' as js;
+
 import 'package:beautiful_dialog/dialogs/dialog_class.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -16,26 +18,39 @@ class _DialogViewState extends State<DialogView> {
       appBar: AppBar(
         title: const Text("Flutter Beautiful Dialogs"),
         actions: [
-          Container(
-            height: 40,
-            margin: const EdgeInsets.only(right: 12),
-            child: Row(
-              children: [
-                Image.asset(
-                  "assets/github.png",
-                  height: 30,
+          GestureDetector(
+            onTap: () {
+              js.context.callMethod('open',
+                  ['https://github.com/Docteur-Parfait/beautiful_dialog.git']);
+            },
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: Container(
+                height: 40,
+                margin: const EdgeInsets.only(right: 12),
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/github.png",
+                      height: 30,
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    const Text(
+                      "Contribute",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(
-                  width: 4,
-                ),
-                const Text(
-                  "Contribute",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+              ),
             ),
           )
         ],
