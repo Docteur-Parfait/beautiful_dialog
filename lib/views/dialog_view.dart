@@ -89,11 +89,20 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
+
                 text: "Comrade is there...",
                 author: "agnilondapakou",
                 onTap: () => DialogClass.comradeIsThere(
                   context,
                   message: "Are you happy to hear about that ?",
+
+                text: "Warning alert",
+                author: "gotflo",
+                onTap: () => DialogClass.showWarningAlertDialog(
+                  context,
+                  warningMessage:
+                      "Are you sure you want to delete this post? this action\ncannot be undone.",
+
                 ),
               ),
             ],
