@@ -35,6 +35,7 @@ git checkout -b your-branch-name
 
 In the code, navigate to `lib/dialogs/dialog_class.dart`. This is where you can add your custom dialog function. For example:
 
+
 ```dart
 static void showDangerAlertDialog(BuildContext context,
     {required String warningMessage}) async {
