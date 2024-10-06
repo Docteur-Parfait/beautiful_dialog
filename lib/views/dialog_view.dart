@@ -165,7 +165,7 @@ class _DialogViewState extends State<DialogView> {
               ),
               SizedBox(height: 8.0),
               Text(
-                'Find out when you get paid or receive payment requests. Get updates on new features, discounts, and promos.',
+                'Find out when you get paid or receive payment requests. Get updates on new features, discounts, and promos .',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14),
               ),

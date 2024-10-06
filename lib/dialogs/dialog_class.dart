@@ -13,7 +13,7 @@ import '../widgets/custom_cancel_btn.dart';
 import '../widgets/expanding_dialog.dart';
 
 class DialogClass {
-  // add your dialog here as a static method
+  // add your dialog here as a static method.
 
   static void showNotifDialog(BuildContext context) {
     showDialog(
