@@ -137,7 +137,7 @@ class _DialogViewState extends State<DialogView> {
     );
   }
 
-  // Méthode pour afficher la boîte de dialogue "Venmo"
+  // Méthode pour afficher la boîte de dialogue "Notification"
   void showVenmoDialog(BuildContext context) {
     showDialog(
       context: context,
