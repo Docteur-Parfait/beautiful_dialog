@@ -118,6 +118,7 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
+
                 text: "Warning alert",
                 author: "gotflo",
                 onTap: () => DialogClass.showWarningAlertDialog(
@@ -133,6 +134,7 @@ class _DialogViewState extends State<DialogView> {
                   context,
                 ),
               ),
+                  
             ],
           ),
         ),

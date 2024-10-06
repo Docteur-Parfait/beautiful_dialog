@@ -38,9 +38,9 @@ class _CustomButtonState extends State<CustomButton> {
               color: _isHovered
                   ? Colors.green // Couleur au survol
                   : Colors.white, // Couleur par défaut
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                  color: const Color.fromARGB(85, 190, 190, 190), width: 0.3),
+                  color: const Color.fromARGB(85, 190, 190, 190), width: 0.4),
             ),
             child: Card(
               elevation: _isHovered ? 10 : 5, // Élévation animée au survol
