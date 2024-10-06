@@ -118,9 +118,23 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
-                  text: "Feedback dialog",
-                  author: "prosmaw",
-                  onTap: () => DialogClass.feedback(context)),
+
+                text: "Warning alert",
+                author: "gotflo",
+                onTap: () => DialogClass.showWarningAlertDialog(
+                  context,
+                  warningMessage:
+                      "Are you sure you want to delete this post? this action\ncannot be undone.",
+                ),
+              ),
+              CustomButton(
+                text: "Swhith theme alert",
+                author: "Lecodeur",
+                onTap: () => DialogClass.showSwitchThemeDialog(
+                  context,
+                ),
+              ),
+                  
             ],
           ),
         ),
