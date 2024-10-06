@@ -117,6 +117,10 @@ class _DialogViewState extends State<DialogView> {
                       "Are you sure you want to delete this post? this action\ncannot be undone.",
                 ),
               ),
+              CustomButton(
+                  text: "Feedback dialog",
+                  author: "prosmaw",
+                  onTap: () => DialogClass.feedback(context)),
             ],
           ),
         ),
