@@ -135,8 +135,7 @@ packages:
       sha256: bdb68674043280c3428e9ec998512fb681678676b3c54e773629ffe74419f8c7
       url: "https://pub.dev"
     source: hosted
-<<<<<<< HEAD
-    version: "1.12.0"
+    version: "1.15.0"
   nested:
     dependency: transitive
     description:
@@ -145,9 +144,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-=======
-    version: "1.15.0"
->>>>>>> e6c9720bf6af0a04b5b9798ae217d24d12cea8e1
   path:
     dependency: transitive
     description:
@@ -237,10 +233,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: f0c73347dfcfa5b3db8bc06e1502668265d39c08f310c29bff4e28eea9699f79
+      sha256: "8fc3bae0b68c02c47c5c86fa8bfa74471d42687b0eded01b78de87872db745e2"
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.9"
+    version: "6.3.12"
   url_launcher_ios:
     dependency: transitive
     description:
@@ -314,5 +310,5 @@ packages:
     source: hosted
     version: "1.1.0"
 sdks:
-  dart: ">=3.4.3 <4.0.0"
-  flutter: ">=3.22.0"
+  dart: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"

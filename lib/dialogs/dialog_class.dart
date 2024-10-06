@@ -1,5 +1,5 @@
-
 import 'package:beautiful_dialog/provider/theme_provider.dart';
+
 import 'package:beautiful_dialog/widgets/rotate_image.dart';
 
 import 'dart:ui';
@@ -14,6 +14,75 @@ import '../widgets/expanding_dialog.dart';
 
 class DialogClass {
   // add your dialog here as a static method
+
+  static void showNotifDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          contentPadding: const EdgeInsets.all(16.0),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              SizedBox(
+                height: 100,
+                child: Image.network(
+                  'https://cdn-icons-png.flaticon.com/512/5337/5337153.png',
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 50,
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 16.0),
+              const Text(
+                'Get a heads up on everything Venmo',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 8.0),
+              const Text(
+                'Find out when you get paid or receive payment requests. Get updates on new features, discounts, and promos.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14),
+              ),
+              const SizedBox(height: 8.0),
+              const Text(
+                'You can change this at any time in Settings.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Not now'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                // Action pour activer les notifications
+              },
+              child: const Text('Allow notifications'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   static void showYesNoConfirmationDialog(
     BuildContext context, {
     required String title,
@@ -275,30 +344,33 @@ class DialogClass {
     );
   }
 
-
   static showSwitchThemeDialog(BuildContext context) {
     return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Consumer<ThemeProvider>(
-          builder: (context, themeProvider, child) {
-            return AlertDialog(
-              backgroundColor:
-                  themeProvider.isDark ? Colors.grey[900] : Colors.white,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(8.0),
+        context: context,
+        builder: (BuildContext context) {
+          return Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return AlertDialog(
+                backgroundColor:
+                    themeProvider.isDark ? Colors.grey[900] : Colors.white,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(8.0),
+                  ),
                 ),
-              ),
-              title: Text(
-                'Theme Switch Dialog',
-                style: TextStyle(
-                    color: themeProvider.isDark ? Colors.white : Colors.black),
-              ),
-              content: const RotateImageWidget(),
-            );
-          },
-      );});}
+                title: Text(
+                  'Theme Switch Dialog',
+                  style: TextStyle(
+                      color:
+                          themeProvider.isDark ? Colors.white : Colors.black),
+                ),
+                content: const RotateImageWidget(),
+              );
+            },
+          );
+        });
+  }
+
   //Feedback Dialog
   static void feedback(BuildContext context) {
     showGeneralDialog(
