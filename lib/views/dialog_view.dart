@@ -134,7 +134,15 @@ class _DialogViewState extends State<DialogView> {
                   context,
                 ),
               ),
-                  
+              CustomButton(
+                text: "Error Alert",
+                author: "shubhanshu-02",
+                onTap: () => DialogClass.showErrorDialog(
+                  context,
+                  message: "An error occurred while processing your request."
+                ),
+              ),
+
             ],
           ),
         ),
