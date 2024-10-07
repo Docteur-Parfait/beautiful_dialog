@@ -14,74 +14,6 @@ import 'package:beautiful_dialog/widgets/ping_pong_dialog.dart';
 class DialogClass {
   // add your dialog here as a static method
 
-  static void showNotifDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          contentPadding: const EdgeInsets.all(16.0),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              SizedBox(
-                height: 100,
-                child: Image.network(
-                  'https://cdn-icons-png.flaticon.com/512/5337/5337153.png',
-                  fit: BoxFit.contain,
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Icon(
-                      Icons.error_outline,
-                      color: Colors.red,
-                      size: 50,
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              const Text(
-                'Get a heads up on everything Venmo',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8.0),
-              const Text(
-                'Find out when you get paid or receive payment requests. Get updates on new features, discounts, and promos.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14),
-              ),
-              const SizedBox(height: 8.0),
-              const Text(
-                'You can change this at any time in Settings.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14),
-              ),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Not now'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                // Action pour activer les notifications
-              },
-              child: const Text('Allow notifications'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   static void showYesNoConfirmationDialog(
     BuildContext context, {
     required String title,
@@ -505,9 +437,9 @@ class DialogClass {
   }
 
   static void showPingPongDialog(
-      BuildContext context, {
-        required String message,
-      }) {
+    BuildContext context, {
+    required String message,
+  }) {
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
@@ -517,10 +449,11 @@ class DialogClass {
         return const SizedBox.shrink();
       },
       transitionBuilder: (context, anim1, anim2, child) {
-        double shakeValue = sin(anim1.value  * 2 * pi * 2) * 10;
+        double shakeValue = sin(anim1.value * 2 * pi * 2) * 10;
         return Center(
           child: Transform(
-            transform: Matrix4.identity()..translate(0.0, shakeValue), // Apply shake translation
+            transform: Matrix4.identity()
+              ..translate(0.0, shakeValue), // Apply shake translation
             alignment: Alignment.center,
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
