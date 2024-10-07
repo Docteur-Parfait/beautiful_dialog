@@ -1,10 +1,10 @@
 import 'package:beautiful_dialog/dialogs/danger_alert.dart';
-import 'package:beautiful_dialog/dialogs/dialog_class.dart';
 import 'package:beautiful_dialog/dialogs/error_dialog.dart';
 import 'package:beautiful_dialog/dialogs/expanding_dialog.dart';
 import 'package:beautiful_dialog/dialogs/feedback_dialog.dart';
 import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
 import 'package:beautiful_dialog/dialogs/ok_confirmation_dialog.dart';
+import 'package:beautiful_dialog/dialogs/ping_pong_dialog.dart';
 import 'package:beautiful_dialog/dialogs/succes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/switch_theme_dialog.dart';
 import 'package:beautiful_dialog/dialogs/warning_alert.dart';
@@ -152,7 +152,7 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                 text: "PingPong Dialog",
                 author: "littleDarkBug",
-                onTap: () => DialogClass.showPingPongDialog(
+                onTap: () => PingPongDialog.showPingPongDialog(
                   context,
                   message: "Please, wait while we're doing the magic!",
                 ),
