@@ -3,16 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class PingPongDialog extends StatefulWidget {
+class PingPongDialogContent extends StatefulWidget {
   final String message;
 
-  const PingPongDialog({super.key, required this.message});
+  const PingPongDialogContent({super.key, required this.message});
 
   @override
-  PingPongDialogState createState() => PingPongDialogState();
+  PingPongDialogContentState createState() => PingPongDialogContentState();
 }
 
-class PingPongDialogState extends State<PingPongDialog> {
+class PingPongDialogContentState extends State<PingPongDialogContent> {
   double ballX = 0.0;
   double ballY = 0.0;
   double ballSpeedX = 0.005;
@@ -225,21 +225,24 @@ class PingPongDialogState extends State<PingPongDialog> {
                     ),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: GestureDetector(
-                    onHorizontalDragUpdate: onHorizontalDrag,
-                    onTapDown: onTapDown,
-                    child: CustomPaint(
-                      painter: PingPongPainter(
-                        ballX: ballX,
-                        ballY: ballY,
-                        paddleX: paddleX,
-                        paddleWidth: paddleWidth,
-                        isGameOver: isGameOver,
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onHorizontalDragUpdate: onHorizontalDrag,
+                      onTapDown: onTapDown,
+                      child: CustomPaint(
+                        painter: PingPongPainter(
+                          ballX: ballX,
+                          ballY: ballY,
+                          paddleX: paddleX,
+                          paddleWidth: paddleWidth,
+                          isGameOver: isGameOver,
+                        ),
+                        child:
+                        Container(), // The CustomPaint will render the game
                       ),
-                      child:
-                          Container(), // The CustomPaint will render the game
                     ),
-                  ),
+                  )
                 ),
                 const SizedBox(height: 20),
                 // Display the score
