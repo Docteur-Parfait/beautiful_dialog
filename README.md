@@ -2,108 +2,111 @@
 
 ![Demo](./demo/demo.gif)
 
-Welcome to **Beautiful Dialogs**, a Flutter open-source project where developers can contribute by adding beautiful dialog widgets! 🌟
+Bienvenue sur **Beautiful Dialogs**, un projet open-source Flutter où les développeurs peuvent contribuer en ajoutant de magnifiques widgets de dialogues ! 🌟
 
-Explore a live demo of the dialogs [here](https://beautiful-dialogs.netlify.app/) to see the magic in action! ✨
+Explorez une démo en direct des dialogues [ici](https://beautiful-dialogs.netlify.app/) pour voir la magie en action ! ✨
 
-## Getting Started
+## Bien démarrer
 
-To contribute to this project, follow these simple steps:
+Pour contribuer à ce projet, suivez ces étapes simples :
 
-### 1. Fork the repository and don't forget to add a star ⭐
+### 1. Forker le dépôt et n'oubliez pas d'ajouter une étoile ⭐
 
-Head over to the [repository](https://github.com/Docteur-Parfait/beautiful_dialog.git) and click the **Fork** button. Don’t forget to star the project as a token of appreciation!
+Rendez-vous sur le [dépôt](https://github.com/Docteur-Parfait/beautiful_dialog.git) et cliquez sur le bouton **Fork**. N’oubliez pas d'ajouter une étoile au projet comme signe d’appréciation !
 
-### 2. Clone the repository
+### 2. Cloner le dépôt
 
-Clone your forked repository locally:
+Clonez votre dépôt forké en local :
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/beautiful_dialog.git
+git clone https://github.com/VOTRE_NOM_UTILISATEUR/beautiful_dialog.git
 cd beautiful_dialog
 ```
 
-### 3. Create a new branch
+### 3. Créer une nouvelle branche
 
-Create a new branch for your custom dialog:
+Créez une nouvelle branche pour votre dialogue personnalisé :
 
 ```bash
-git checkout -b your-branch-name
+git checkout -b votre-nom-branche
 ```
 
-### 4. Add your custom dialog
+### 4. Ajouter votre dialogue personnalisé
 
-In the code, navigate to `lib/dialogs/dialog_class.dart`. This is where you can add your custom dialog function. For example:
-
+Dans le dossier `lib > dialogs`, ajoutez un nouveau fichier `.dart` avec le nom de votre composant de dialogue, par exemple `ok_confirmation_alert.dart`. Après, il faut se rendre dans le fichier `libs > dialogs > dialogs.dart` pour ajouter un export de son fichier. Voici un exemple de composant :
 
 ```dart
-static void showDangerAlertDialog(BuildContext context,
-    {required String warningMessage}) async {
-  return showDialog<void>(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        backgroundColor: Colors.red[50],
-        title: const Text(
-          'Danger',
-          style: TextStyle(color: Colors.red),
-        ),
-        content: Text(
-          warningMessage,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        actions: <Widget>[
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
+import 'package:flutter/material.dart';
+
+class OkConfirmationDialog {
+  static void showOkConfirmationDialog(
+    BuildContext context, {
+    required String title,
+    required String message,
+  }) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue, // Couleur bleue pour Ok
+              ),
+              child: const Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Fermer la boîte
+              },
             ),
-            child: const Text('Close'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
+          ],
+        );
+      },
+    );
+  }
 }
 ```
 
-### 5. Call your dialog
+### 5. Appeler votre dialogue
 
-In `lib/views/dialog_view.dart`, use the `CustomButton` widget to call your dialog like this:
+Dans `lib/views/dialog_view.dart`, utilisez le widget `CustomButton` pour appeler votre dialogue comme ceci :
 
 ```dart
 CustomButton(
-  text: "Danger alert",
-  author: "Tech Pastor",
-  onTap: () => DialogClass.showDangerAlertDialog(context,
-      warningMessage: "Do you want to logout?"),
+  text: "Confirmation Ok",
+  author: "Nom du Contributeur",
+  onTap: () => OkConfirmationDialog.showOkConfirmationDialog(
+      context,
+      title: "Confirmation",
+      message: "Voulez-vous vraiment continuer ?"),
 )
 ```
 
-### 6. Commit, push, and submit a pull request
+### 6. Commit, push et soumettre une Pull Request
 
-Once you've added your dialog, commit your changes:
+Une fois que vous avez ajouté votre dialogue, commitez vos modifications :
 
 ```bash
 git add .
-git commit -m "Added new custom dialog"
-git push origin your-branch-name
+git commit -m "Ajout d'un nouveau dialogue personnalisé"
+git push origin votre-nom-branche
 ```
 
-Now, open a pull request from your forked repository.
+Ensuite, ouvrez une Pull Request depuis votre dépôt forké.
 
-## Contribution Guidelines
+## Règles de contribution
 
-- Contributions must only involve adding new dialogs.
-- Ensure the code structure and format is respected.
-- Test your dialog before submitting the PR.
+- Les contributions doivent concerner l'ajout de nouveaux dialogues.
+- Assurez-vous que la structure et le format du code sont respectés.
+- Testez votre dialogue avant de soumettre une PR.
+- Les contributeurs peuvent également travailler sur le site, comme ajuster les boutons, corriger les fautes ou ajouter des innovations. Cependant, la base reste de fournir une collection de "beautiful dialogs".
+- Vous pouvez ajouter également un package externe mais pas plus que un
 
-## License
+## Licence
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Ce projet est sous licence MIT - consultez le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ---
 
-Happy coding and thank you for contributing to **Beautiful Dialogs**! 😄
+Bon codage et merci de contribuer à **Beautiful Dialogs** ! 😄
