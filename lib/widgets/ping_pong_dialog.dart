@@ -8,61 +8,75 @@ class PingPongDialog extends StatefulWidget {
   const PingPongDialog({Key? key, required this.message}) : super(key: key);
 
   @override
-  _PingPongDialogState createState() => _PingPongDialogState();
+  PingPongDialogState createState() => PingPongDialogState();
 }
 
-class _PingPongDialogState extends State<PingPongDialog> {
+class PingPongDialogState extends State<PingPongDialog> {
   double ballX = 0.0;
   double ballY = 0.0;
   double ballSpeedX = 0.01;
-  double ballSpeedY = 0.01;
+  double ballSpeedY = 0.012;
   double paddleX = 0.0;
   double paddleWidth = 0.3;
   int score = 0;
   bool isGameOver = false;
+  bool isPlaying = false;
 
   late Timer gameTimer;
 
   @override
   void initState() {
     super.initState();
-    startGame();
   }
 
   void startGame() {
-    gameTimer = Timer.periodic(const Duration(milliseconds: 16), (timer) {
+    gameTimer = Timer.periodic(const Duration(milliseconds: 20), (timer) {
       updateBallPosition();
       checkForCollisions();
     });
+    isPlaying = true;
   }
 
   void updateBallPosition() {
     setState(() {
-      ballX += ballSpeedX;
-      ballY += ballSpeedY;
+      // Calculate the next potential positions
+      double nextBallX = ballX + ballSpeedX;
+      double nextBallY = ballY + ballSpeedY;
 
-      // Bounce the ball off the left and right walls
-      if (ballX <= -1 || ballX >= 1) {
-        ballSpeedX = -ballSpeedX * 1.05;
+      // Check for horizontal boundaries and bounce back if necessary
+      if (nextBallX <= -1) {
+        nextBallX = -1; // Snap to left boundary
+        ballSpeedX = -ballSpeedX; // Reverse direction
       }
 
-      // Bounce the ball off the top wall
-      if (ballY <= -1) {
-        ballSpeedY = -ballSpeedY * 1.05;
+      if (nextBallX >= 1) {
+        nextBallX = 1; // Snap to right boundary
+        ballSpeedX = -ballSpeedX; // Reverse direction
       }
 
-      // Check if the ball has passed the paddle (game over)
-      if (ballY >= 0.915 && !(ballX >= paddleX && ballX <= paddleX + paddleWidth)) {
+      // Check for vertical boundaries and bounce back if necessary
+      if (nextBallY <= -1) {
+        nextBallY = -1; // Snap to top boundary
+        ballSpeedY = -ballSpeedY * 1.05; // Reverse direction with speed boost
+      }
+
+      if (nextBallY >= 0.91) {
+        ballY = 0.95;
         gameOver();
       }
+
+      ballY = nextBallY;
+      ballX = nextBallX;
     });
   }
+
 
   void checkForCollisions() {
     // Check for collision between the ball and the paddle
     if (ballY >= 0.8 && ballY <=0.9 && ballX >= paddleX && ballX <= paddleX + paddleWidth) {
       setState(() {
-        ballSpeedY = -ballSpeedY * 1.15;
+        ballSpeedY = -ballSpeedY;
+        ballY = (ballY + ballSpeedY) > 1 ? 0.95 : ballY; // low rate case
         score++;
       });
     }
@@ -71,6 +85,7 @@ class _PingPongDialogState extends State<PingPongDialog> {
   void gameOver() {
     setState(() {
       isGameOver = true;
+      isPlaying = false;
     });
     gameTimer.cancel();
   }
@@ -80,7 +95,7 @@ class _PingPongDialogState extends State<PingPongDialog> {
       ballX = 0;
       ballY = 0;
       ballSpeedX = 0.01;
-      ballSpeedY = 0.01;
+      ballSpeedY = 0.012;
       paddleX = 0;
       score = 0;
       isGameOver = false;
@@ -92,12 +107,12 @@ class _PingPongDialogState extends State<PingPongDialog> {
     if (event is RawKeyDownEvent) {
       if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
         setState(() {
-          paddleX -= 0.075;
+          paddleX -= 0.05;
           if (paddleX < -1) paddleX = -1;
         });
       } else if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
         setState(() {
-          paddleX += 0.075;
+          paddleX += 0.05;
           if (paddleX + paddleWidth > 1) paddleX = 1 - paddleWidth;
         });
       }
@@ -111,6 +126,7 @@ class _PingPongDialogState extends State<PingPongDialog> {
       child: Container(
         color: Colors.transparent,
         width: 450,
+        height: 550,
         child: RawKeyboardListener(
           autofocus: true,
           focusNode: FocusNode(),
@@ -181,13 +197,12 @@ class _PingPongDialogState extends State<PingPongDialog> {
                 // Display the score
                 Text('Score: $score', style: const TextStyle(fontSize: 16)),
                 const SizedBox(height: 20),
-                // Game Over text and restart button
-                if (isGameOver)
+                if (!isPlaying)
                   Column(
                     children: [
                       const SizedBox(height: 10),
                       ElevatedButton(
-                        onPressed: restartGame,
+                        onPressed: isGameOver ? restartGame : startGame,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 40, vertical: 15),
@@ -205,10 +220,10 @@ class _PingPongDialogState extends State<PingPongDialog> {
                             ),
                           ),
                         ),
-                        child: const Text(
-                          "Restart",
+                        child: Text(
+                          isGameOver ? "Restart" : "Start",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 14, color: Colors.white),
+                          style: const TextStyle(fontSize: 14, color: Colors.white),
                         ),
                       ),
                     ],
