@@ -139,7 +139,7 @@ class PingPongDialogContentState extends State<PingPongDialogContent> {
 
   void onHorizontalDrag(DragUpdateDetails details) {
     setState(() {
-      paddleX += details.delta.dx / _getContainerWidth();
+      paddleX += (details.delta.dx * 1.02) / _getContainerWidth();
 
       // Clamp paddleX to stay within bounds
       paddleX = _clampPaddleX(paddleX);
