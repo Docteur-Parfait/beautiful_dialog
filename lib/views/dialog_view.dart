@@ -4,6 +4,7 @@ import 'package:beautiful_dialog/dialogs/expanding_dialog.dart';
 import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
 import 'package:beautiful_dialog/dialogs/ok_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/succes_dialog.dart';
+import 'package:beautiful_dialog/dialogs/warning_alert.dart';
 import 'package:beautiful_dialog/dialogs/yes_no_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -117,7 +118,7 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                 text: "Warning alert",
                 author: "gotflo",
-                onTap: () => DialogClass.showWarningAlertDialog(
+                onTap: () => WarningAlert.showWarningAlertDialog(
                   context,
                   warningMessage:
                       "Are you sure you want to delete this post? This action\ncannot be undone.",
