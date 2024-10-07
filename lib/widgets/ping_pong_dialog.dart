@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 
 class PingPongDialog extends StatefulWidget {
   final String message;
-  const PingPongDialog({Key? key, required this.message}) : super(key: key);
+  const PingPongDialog({super.key, required this.message});
 
   @override
   PingPongDialogState createState() => PingPongDialogState();
