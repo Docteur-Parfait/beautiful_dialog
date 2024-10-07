@@ -514,7 +514,7 @@ class DialogClass {
       barrierLabel: "Dismiss",
       transitionDuration: const Duration(milliseconds: 800),
       pageBuilder: (context, anim1, anim2) {
-        return const SizedBox.shrink(); //
+        return const SizedBox.shrink();
       },
       transitionBuilder: (context, anim1, anim2, child) {
         double shakeValue = sin(anim1.value  * 2 * pi * 2) * 10;
@@ -523,7 +523,7 @@ class DialogClass {
             transform: Matrix4.identity()..translate(0.0, shakeValue), // Apply shake translation
             alignment: Alignment.center,
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // Adjust blur intensity
+              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
               child: PingPongDialog(message: message),
             ),
           ),
