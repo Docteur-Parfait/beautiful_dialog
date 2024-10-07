@@ -40,7 +40,7 @@ class ExpandingDialogState extends State<ExpandingDialog>
 
   void _onUpdate([DragUpdateDetails? details]) {
     if (_controller.status == AnimationStatus.dismissed) {
-      _rotationY = -0.1; // Small rotation
+      _rotationY = -0.05; //ll rotation
       _controller.forward();
     }else {
       _rotationY = 0.0;

@@ -7,7 +7,7 @@ void main() {
   testWidgets('ExpandingButtonDialog displays correctly',
       (WidgetTester tester) async {
     // Define the message to be passed to the dialog
-    const testMessage = 'Try to close it at first try.';
+    const testMessage = 'Try to close it on the first try.';
 
     // Build the dialog widget
     await tester.pumpWidget(MaterialApp(
