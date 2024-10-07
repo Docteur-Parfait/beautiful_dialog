@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -178,8 +179,9 @@ class PingPongDialogContentState extends State<PingPongDialogContent> {
                         paddleX += details.delta.dx /
                             MediaQuery.of(context).size.width;
                         if (paddleX < -1) paddleX = -1;
-                        if (paddleX + paddleWidth > 1)
+                        if (paddleX + paddleWidth > 1) {
                           paddleX = 1 - paddleWidth * 1.2;
+                        }
                       });
                     },
                     child: CustomPaint(

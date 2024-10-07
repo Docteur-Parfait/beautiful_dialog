@@ -1,17 +1,8 @@
-import 'package:beautiful_dialog/dialogs/danger_alert.dart';
-import 'package:beautiful_dialog/dialogs/error_dialog.dart';
-import 'package:beautiful_dialog/dialogs/expanding_dialog.dart';
-import 'package:beautiful_dialog/dialogs/feedback_dialog.dart';
-import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
-import 'package:beautiful_dialog/dialogs/ok_confirmation_dialog.dart';
-import 'package:beautiful_dialog/dialogs/ping_pong_dialog.dart';
-import 'package:beautiful_dialog/dialogs/succes_dialog.dart';
-import 'package:beautiful_dialog/dialogs/switch_theme_dialog.dart';
-import 'package:beautiful_dialog/dialogs/warning_alert.dart';
-import 'package:beautiful_dialog/dialogs/yes_no_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../dialogs/dialogs.dart';
 
 class DialogView extends StatefulWidget {
   const DialogView({super.key});
