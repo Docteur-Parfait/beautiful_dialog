@@ -135,6 +135,14 @@ class _DialogViewState extends State<DialogView> {
                 author: "Armel Bogue",
                 onTap: () => showVenmoDialog(context),
               ),
+              CustomButton(
+                text: "PingPong Dialog",
+                author: "littleDarkBug",
+                onTap: () => DialogClass.showPingPongDialog(
+                  context,
+                  message: "Please, wait while we're doing the magic!",
+                ),
+              ),
             ],
           ),
         ),
