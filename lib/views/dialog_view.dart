@@ -118,6 +118,11 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
+                  text: "Feedback dialog",
+                  author: "prosmaw",
+                  onTap: () => DialogClass.feedback(context)
+              ),
+              CustomButton(
                 text: "Switch theme alert",
                 author: "Lecodeur",
                 onTap: () => DialogClass.showSwitchThemeDialog(context),
