@@ -1,3 +1,4 @@
+import 'package:beautiful_dialog/dialogs/danger_alert.dart';
 import 'package:beautiful_dialog/dialogs/dialog_class.dart';
 import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
 import 'package:beautiful_dialog/dialogs/ok_confirmation_dialog.dart';
@@ -89,7 +90,7 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                 text: "Danger alert",
                 author: "Tech Pastor",
-                onTap: () => DialogClass.showDangerAlertDialog(
+                onTap: () => DangerAlert.showDangerAlertDialog(
                   context,
                   warningMessage: "Do you want to log out?",
                 ),
