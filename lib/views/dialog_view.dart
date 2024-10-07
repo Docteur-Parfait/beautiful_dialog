@@ -1,6 +1,7 @@
 import 'package:beautiful_dialog/dialogs/danger_alert.dart';
 import 'package:beautiful_dialog/dialogs/dialog_class.dart';
 import 'package:beautiful_dialog/dialogs/expanding_dialog.dart';
+import 'package:beautiful_dialog/dialogs/feedback_dialog.dart';
 import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
 import 'package:beautiful_dialog/dialogs/ok_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/succes_dialog.dart';
@@ -127,7 +128,7 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                   text: "Feedback dialog",
                   author: "prosmaw",
-                  onTap: () => DialogClass.feedback(context)),
+                  onTap: () => FeedbackDialog.showFeedbackDialog(context)),
               CustomButton(
                 text: "Switch theme alert",
                 author: "Lecodeur",
