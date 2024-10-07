@@ -14,39 +14,6 @@ import 'package:beautiful_dialog/widgets/ping_pong_dialog.dart';
 class DialogClass {
   // add your dialog here as a static method
 
-  static void showYesNoConfirmationDialog(
-    BuildContext context, {
-    required String title,
-    required String subtitle,
-  }) async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(subtitle),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('No'),
-              onPressed: () {
-                Navigator.of(context).pop(); // Fermer la boîte
-              },
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green, // Couleur personnalisée pour Yes
-              ),
-              child: const Text('Yes'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   static void showOkConfirmationDialog(
     BuildContext context, {
     required String title,

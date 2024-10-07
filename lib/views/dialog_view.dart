@@ -1,5 +1,6 @@
 import 'package:beautiful_dialog/dialogs/dialog_class.dart';
 import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
+import 'package:beautiful_dialog/dialogs/yes_no_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -69,7 +70,7 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                 text: "Yes or No confirmation",
                 author: "Tech Pastor",
-                onTap: () => DialogClass.showYesNoConfirmationDialog(
+                onTap: () => YesOrNoDialog.showYesNoConfirmationDialog(
                   context,
                   title: "Confirm",
                   subtitle: "Do you want to confirm?",
