@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 class PingPongDialogContent extends StatefulWidget {
   final String message;
+
   const PingPongDialogContent({super.key, required this.message});
 
   @override
@@ -22,6 +23,8 @@ class PingPongDialogContentState extends State<PingPongDialogContent> {
   bool isGameOver = false;
   bool isPlaying = false;
 
+  final GlobalKey _keyContainer = GlobalKey();
+
   late Timer gameTimer;
 
   @override
@@ -30,7 +33,7 @@ class PingPongDialogContentState extends State<PingPongDialogContent> {
   }
 
   void startGame() {
-    gameTimer = Timer.periodic(const Duration(milliseconds: 14), (timer) {
+    gameTimer = Timer.periodic(const Duration(milliseconds: 12), (timer) {
       updateBallPosition();
       checkForCollisions();
     });
@@ -43,31 +46,38 @@ class PingPongDialogContentState extends State<PingPongDialogContent> {
       double nextBallX = ballX + ballSpeedX;
       double nextBallY = ballY + ballSpeedY;
 
-      // Check for horizontal boundaries and bounce back if necessary
-      if (nextBallX <= -1) {
-        nextBallX = -1; // Snap to left boundary
-        ballSpeedX = -ballSpeedX; // Reverse direction
-      }
+      // Check and adjust ball position based on boundaries
+      nextBallX = _checkHorizontalBoundaries(nextBallX);
+      nextBallY = _checkVerticalBoundaries(nextBallY);
 
-      if (nextBallX >= 1) {
-        nextBallX = 1; // Snap to right boundary
-        ballSpeedX = -ballSpeedX; // Reverse direction
-      }
-
-      // Check for vertical boundaries and bounce back if necessary
-      if (nextBallY <= -1) {
-        nextBallY = -1; // Snap to top boundary
-        ballSpeedY = -ballSpeedY * 1.05; // Reverse direction with speed boost
-      }
-
-      if (nextBallY >= 0.91) {
-        ballY = 0.98;
-        gameOver();
-      }
-
-      ballY = nextBallY;
+      // Update ball position
       ballX = nextBallX;
+      ballY = nextBallY;
     });
+  }
+
+  double _checkHorizontalBoundaries(double nextBallX) {
+    if (nextBallX <= -1) {
+      ballSpeedX = -ballSpeedX; // Reverse direction
+      return -1;
+    }
+    if (nextBallX >= 1) {
+      ballSpeedX = -ballSpeedX;
+      return 1;
+    }
+    return nextBallX;
+  }
+
+  double _checkVerticalBoundaries(double nextBallY) {
+    if (nextBallY <= -1) {
+      ballSpeedY = -ballSpeedY * 1.05; // Reverse direction with speed boost
+      return -1;
+    }
+    if (nextBallY >= 0.91) {
+      ballY = 0.98;
+      gameOver();
+    }
+    return nextBallY;
   }
 
   void checkForCollisions() {
@@ -109,16 +119,56 @@ class PingPongDialogContentState extends State<PingPongDialogContent> {
     if (event is RawKeyDownEvent) {
       if (event.logicalKey == LogicalKeyboardKey.arrowLeft) {
         setState(() {
-          paddleX -= 0.05;
+          paddleX -= 0.09;
           if (paddleX < -1) paddleX = -1;
         });
       } else if (event.logicalKey == LogicalKeyboardKey.arrowRight) {
         setState(() {
-          paddleX += 0.05;
+          paddleX += 0.09;
           if (paddleX + paddleWidth > 1) paddleX = 1 - paddleWidth;
         });
       }
     }
+  }
+
+  void onTapDown(TapDownDetails details) {
+    setState(() {
+      paddleX = _calculatePaddleX(details.localPosition.dx);
+    });
+  }
+
+  void onHorizontalDrag(DragUpdateDetails details) {
+    setState(() {
+      paddleX += (details.delta.dx * 1.02) / _getContainerWidth();
+
+      // Clamp paddleX to stay within bounds
+      paddleX = _clampPaddleX(paddleX);
+    });
+  }
+
+  double _getContainerWidth() {
+    final RenderBox renderBox =
+        _keyContainer.currentContext!.findRenderObject() as RenderBox;
+    return renderBox.size.width;
+  }
+
+  double _calculatePaddleX(double tapX) {
+    final width = _getContainerWidth();
+    double newPaddleX = (tapX / width) * 2 - 1; // Convert to range -1 to 1
+    return _clampPaddleX(newPaddleX); // Clamp the new paddleX value
+  }
+
+  double _clampPaddleX(double x) {
+    if (x < -1) return -1;
+    if (x + paddleWidth > 1) return 1 - paddleWidth;
+    return x;
+  }
+
+  @override
+  void dispose() {
+    // Cancel the timer when the widget is disposed
+    gameTimer!.cancel();
+    super.dispose();
   }
 
   @override
@@ -165,6 +215,8 @@ class PingPongDialogContentState extends State<PingPongDialogContent> {
                 // Game area
                 Container(
                   height: 300,
+                  width: 460,
+                  key: _keyContainer,
                   decoration: BoxDecoration(
                     gradient: const RadialGradient(
                       colors: [Color(0xffffffff), Color(0xfff1efef)],
@@ -173,29 +225,24 @@ class PingPongDialogContentState extends State<PingPongDialogContent> {
                     ),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: GestureDetector(
-                    onHorizontalDragUpdate: (details) {
-                      setState(() {
-                        paddleX += details.delta.dx /
-                            MediaQuery.of(context).size.width;
-                        if (paddleX < -1) paddleX = -1;
-                        if (paddleX + paddleWidth > 1) {
-                          paddleX = 1 - paddleWidth * 1.2;
-                        }
-                      });
-                    },
-                    child: CustomPaint(
-                      painter: PingPongPainter(
-                        ballX: ballX,
-                        ballY: ballY,
-                        paddleX: paddleX,
-                        paddleWidth: paddleWidth,
-                        isGameOver: isGameOver,
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onHorizontalDragUpdate: onHorizontalDrag,
+                      onTapDown: onTapDown,
+                      child: CustomPaint(
+                        painter: PingPongPainter(
+                          ballX: ballX,
+                          ballY: ballY,
+                          paddleX: paddleX,
+                          paddleWidth: paddleWidth,
+                          isGameOver: isGameOver,
+                        ),
+                        child:
+                        Container(), // The CustomPaint will render the game
                       ),
-                      child:
-                          Container(), // The CustomPaint will render the game
                     ),
-                  ),
+                  )
                 ),
                 const SizedBox(height: 20),
                 // Display the score

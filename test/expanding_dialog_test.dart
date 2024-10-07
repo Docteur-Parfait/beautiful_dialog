@@ -35,14 +35,10 @@ void main() {
     // Verify if the cursor changes to hand on hover
     await tester.sendEventToBinding(
       const PointerHoverEvent(
-        position: Offset(150, 150), // Adjust the position based on your layout
+        position: Offset(200, 200),
       ),
     );
     await tester.pumpAndSettle();
-
-    // Check for hover effect by ensuring _rotationY is altered (optional)
-    // This could involve checking the rendered transformation, which is complex
-    // So we can skip that part for simplicity.
 
     // Close the dialog
     await tester.tap(find.text('Done'));
