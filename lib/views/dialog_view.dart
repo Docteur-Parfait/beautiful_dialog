@@ -118,6 +118,11 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
+                  text: "Feedback dialog",
+                  author: "prosmaw",
+                  onTap: () => DialogClass.feedback(context)
+              ),
+              CustomButton(
                 text: "Switch theme alert",
                 author: "Lecodeur",
                 onTap: () => DialogClass.showSwitchThemeDialog(context),
@@ -134,6 +139,14 @@ class _DialogViewState extends State<DialogView> {
                 text: "Show notification Dialog",
                 author: "Armel Bogue",
                 onTap: () => showVenmoDialog(context),
+              ),
+              CustomButton(
+                text: "PingPong Dialog",
+                author: "littleDarkBug",
+                onTap: () => DialogClass.showPingPongDialog(
+                  context,
+                  message: "Please, wait while we're doing the magic!",
+                ),
               ),
             ],
           ),
