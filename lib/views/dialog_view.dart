@@ -1,5 +1,6 @@
 import 'package:beautiful_dialog/dialogs/danger_alert.dart';
 import 'package:beautiful_dialog/dialogs/dialog_class.dart';
+import 'package:beautiful_dialog/dialogs/error_dialog.dart';
 import 'package:beautiful_dialog/dialogs/expanding_dialog.dart';
 import 'package:beautiful_dialog/dialogs/feedback_dialog.dart';
 import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
@@ -138,7 +139,7 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                 text: "Error Alert",
                 author: "shubhanshu-02",
-                onTap: () => DialogClass.showErrorDialog(
+                onTap: () => ErrorDialog.showErrorDialog(
                   context,
                   message: "An error occurred while processing your request.",
                 ),
