@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 //Design source: https://dribbble.com/shots/24921582-Feedback-Modal
 
-class FeedbackDialog extends StatefulWidget {
-  const FeedbackDialog({
+class FeedbackDialogContent extends StatefulWidget {
+  const FeedbackDialogContent({
     super.key,
   });
 
   @override
-  State<FeedbackDialog> createState() => _FeedbackDialogState();
+  State<FeedbackDialogContent> createState() => _FeedbackDialogState();
 }
 
-class _FeedbackDialogState extends State<FeedbackDialog> {
+class _FeedbackDialogState extends State<FeedbackDialogContent> {
   int stars = -1;
   TextEditingController commentController = TextEditingController();
   @override

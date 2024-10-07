@@ -2,15 +2,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class PingPongDialog extends StatefulWidget {
+class PingPongDialogContent extends StatefulWidget {
   final String message;
-  const PingPongDialog({super.key, required this.message});
+  const PingPongDialogContent({super.key, required this.message});
 
   @override
-  PingPongDialogState createState() => PingPongDialogState();
+  PingPongDialogContentState createState() => PingPongDialogContentState();
 }
 
-class PingPongDialogState extends State<PingPongDialog> {
+class PingPongDialogContentState extends State<PingPongDialogContent> {
   double ballX = 0.0;
   double ballY = 0.0;
   double ballSpeedX = 0.005;
@@ -69,10 +69,12 @@ class PingPongDialogState extends State<PingPongDialog> {
     });
   }
 
-
   void checkForCollisions() {
     // Check for collision between the ball and the paddle
-    if (ballY >= 0.8 && ballY <=0.88 && ballX >= paddleX && ballX <= paddleX + paddleWidth) {
+    if (ballY >= 0.8 &&
+        ballY <= 0.88 &&
+        ballX >= paddleX &&
+        ballX <= paddleX + paddleWidth) {
       setState(() {
         ballSpeedY = -ballSpeedY;
         ballY = (ballY + ballSpeedY) > 1 ? 0.95 : ballY; // low rate case
@@ -151,9 +153,9 @@ class PingPongDialogState extends State<PingPongDialog> {
                       const Text(
                         "Play this tiny game while waiting",
                         style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.normal,
-                            color: Colors.black54
-                        ),
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                            color: Colors.black54),
                         textAlign: TextAlign.center,
                       ),
                     ],
@@ -176,7 +178,8 @@ class PingPongDialogState extends State<PingPongDialog> {
                         paddleX += details.delta.dx /
                             MediaQuery.of(context).size.width;
                         if (paddleX < -1) paddleX = -1;
-                        if (paddleX + paddleWidth > 1) paddleX = 1 - paddleWidth * 1.2;
+                        if (paddleX + paddleWidth > 1)
+                          paddleX = 1 - paddleWidth * 1.2;
                       });
                     },
                     child: CustomPaint(
@@ -187,7 +190,8 @@ class PingPongDialogState extends State<PingPongDialog> {
                         paddleWidth: paddleWidth,
                         isGameOver: isGameOver,
                       ),
-                      child: Container(), // The CustomPaint will render the game
+                      child:
+                          Container(), // The CustomPaint will render the game
                     ),
                   ),
                 ),
@@ -211,8 +215,8 @@ class PingPongDialogState extends State<PingPongDialog> {
                               style: BorderStyle.solid,
                               width: 1),
                         ).copyWith(
-                          shape: WidgetStateProperty.all<
-                              RoundedRectangleBorder>(
+                          shape:
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -221,7 +225,8 @@ class PingPongDialogState extends State<PingPongDialog> {
                         child: Text(
                           isGameOver ? "Restart" : "Start",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 14, color: Colors.white),
+                          style: const TextStyle(
+                              fontSize: 14, color: Colors.white),
                         ),
                       ),
                     ],
