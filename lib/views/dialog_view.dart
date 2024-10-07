@@ -1,5 +1,6 @@
 import 'package:beautiful_dialog/dialogs/danger_alert.dart';
 import 'package:beautiful_dialog/dialogs/dialog_class.dart';
+import 'package:beautiful_dialog/dialogs/expanding_dialog.dart';
 import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
 import 'package:beautiful_dialog/dialogs/ok_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/succes_dialog.dart';
@@ -108,7 +109,7 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                 text: "Expanding alert",
                 author: "littleDarkBug",
-                onTap: () => DialogClass.showExpandingDialog(
+                onTap: () => ExpandingDialogClass.showExpandingDialog(
                   context,
                   message: "Try to close it on the first try.",
                 ),
