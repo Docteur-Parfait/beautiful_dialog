@@ -2,6 +2,7 @@ import 'package:beautiful_dialog/dialogs/danger_alert.dart';
 import 'package:beautiful_dialog/dialogs/dialog_class.dart';
 import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
 import 'package:beautiful_dialog/dialogs/ok_confirmation_dialog.dart';
+import 'package:beautiful_dialog/dialogs/succes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/yes_no_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +99,7 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                 text: "Success alert",
                 author: "Just2sire",
-                onTap: () => DialogClass.showSuccessDialog(
+                onTap: () => SuccesDialog.showSuccessDialog(
                   context,
                   message:
                       "Congrats! You will now enjoy our new updates for next year.",
