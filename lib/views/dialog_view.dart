@@ -5,6 +5,7 @@ import 'package:beautiful_dialog/dialogs/feedback_dialog.dart';
 import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
 import 'package:beautiful_dialog/dialogs/ok_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/succes_dialog.dart';
+import 'package:beautiful_dialog/dialogs/switch_theme_dialog.dart';
 import 'package:beautiful_dialog/dialogs/warning_alert.dart';
 import 'package:beautiful_dialog/dialogs/yes_no_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
@@ -132,7 +133,7 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                 text: "Switch theme alert",
                 author: "Lecodeur",
-                onTap: () => DialogClass.showSwitchThemeDialog(context),
+                onTap: () => SwitchThemeDialog.showSwitchThemeDialog(context),
               ),
               CustomButton(
                 text: "Error Alert",
