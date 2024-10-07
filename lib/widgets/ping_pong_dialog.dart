@@ -13,8 +13,8 @@ class PingPongDialog extends StatefulWidget {
 class PingPongDialogState extends State<PingPongDialog> {
   double ballX = 0.0;
   double ballY = 0.0;
-  double ballSpeedX = 0.01;
-  double ballSpeedY = 0.012;
+  double ballSpeedX = 0.005;
+  double ballSpeedY = 0.005;
   double paddleX = 0.0;
   double paddleWidth = 0.3;
   int score = 0;
@@ -29,7 +29,7 @@ class PingPongDialogState extends State<PingPongDialog> {
   }
 
   void startGame() {
-    gameTimer = Timer.periodic(const Duration(milliseconds: 20), (timer) {
+    gameTimer = Timer.periodic(const Duration(milliseconds: 14), (timer) {
       updateBallPosition();
       checkForCollisions();
     });
@@ -60,7 +60,7 @@ class PingPongDialogState extends State<PingPongDialog> {
       }
 
       if (nextBallY >= 0.91) {
-        ballY = 0.95;
+        ballY = 0.98;
         gameOver();
       }
 
@@ -72,7 +72,7 @@ class PingPongDialogState extends State<PingPongDialog> {
 
   void checkForCollisions() {
     // Check for collision between the ball and the paddle
-    if (ballY >= 0.8 && ballY <=0.9 && ballX >= paddleX && ballX <= paddleX + paddleWidth) {
+    if (ballY >= 0.8 && ballY <=0.88 && ballX >= paddleX && ballX <= paddleX + paddleWidth) {
       setState(() {
         ballSpeedY = -ballSpeedY;
         ballY = (ballY + ballSpeedY) > 1 ? 0.95 : ballY; // low rate case
@@ -93,8 +93,8 @@ class PingPongDialogState extends State<PingPongDialog> {
     setState(() {
       ballX = 0;
       ballY = 0;
-      ballSpeedX = 0.01;
-      ballSpeedY = 0.012;
+      ballSpeedX = 0.006;
+      ballSpeedY = 0.006;
       paddleX = 0;
       score = 0;
       isGameOver = false;
@@ -124,8 +124,7 @@ class PingPongDialogState extends State<PingPongDialog> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Container(
         color: Colors.transparent,
-        width: 450,
-        height: 550,
+        width: 480,
         child: RawKeyboardListener(
           autofocus: true,
           focusNode: FocusNode(),
@@ -143,7 +142,7 @@ class PingPongDialogState extends State<PingPongDialog> {
                       Text(
                         widget.message,
                         style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 14, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 10),
@@ -284,7 +283,7 @@ class PingPongPainter extends CustomPainter {
 
       const textStyle = TextStyle(
         color: Colors.white,
-        fontSize: 30,
+        fontSize: 24,
         fontWeight: FontWeight.bold,
       );
       const textSpan = TextSpan(text: 'Game Over', style: textStyle);
