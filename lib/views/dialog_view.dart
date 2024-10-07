@@ -1,5 +1,6 @@
 import 'package:beautiful_dialog/dialogs/dialog_class.dart';
 import 'package:beautiful_dialog/dialogs/notif_dialog.dart';
+import 'package:beautiful_dialog/dialogs/ok_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/yes_no_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +80,7 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                 text: "Ok confirmation",
                 author: "Tech Pastor",
-                onTap: () => DialogClass.showOkConfirmationDialog(
+                onTap: () => OkConfirmationDialog.showOkConfirmationDialog(
                   context,
                   title: "Confirm",
                   message: "Action confirmed successfully",
