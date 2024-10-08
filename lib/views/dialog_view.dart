@@ -2,6 +2,7 @@ import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 import '../dialogs/dialogs.dart';
 
 class DialogView extends StatefulWidget {
@@ -148,6 +149,17 @@ class _DialogViewState extends State<DialogView> {
                   message: "Please, wait while we're doing the magic!",
                 ),
               ),
+              CustomButton(
+                text: "Login Dialog",
+                author: "Uzaif",
+                onTap: () => LoginDialog.showLoginDialog(
+                  context,
+                  message: "You Can login here",
+                  isSuccess: true, // or false, depending on your logic
+                ),
+              ),
+
+
             ],
           ),
         ),

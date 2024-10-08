@@ -10,3 +10,4 @@ export "succes_dialog.dart";
 export "switch_theme_dialog.dart";
 export "warning_alert.dart";
 export "yes_no_dialog.dart";
+export 'login.dart';
