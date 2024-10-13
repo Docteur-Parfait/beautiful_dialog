@@ -1,3 +1,4 @@
+import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -148,6 +149,11 @@ class _DialogViewState extends State<DialogView> {
                   message: "Please, wait while we're doing the magic!",
                 ),
               ),
+              CustomButton(
+                  text: " Discard Changes dialog",
+                  author: "Shubhanshu-02",
+                  onTap: () => DiscardChangesDialog.showDiscardDialog(context)
+                  ),
             ],
           ),
         ),
