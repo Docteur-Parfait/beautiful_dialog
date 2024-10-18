@@ -162,6 +162,10 @@ class _DialogViewState extends State<DialogView> {
                   text: "Paiement dialog",
                   author: "Tech Pastor",
                   onTap: () => PaiementDialog.paiementDialog(context)),
+              CustomButton(
+                  text: "Gravity dialog",
+                  author: "prosmaw",
+                  onTap: () => GravityDialog.showGravityDialog(context)),
             ],
           ),
         ),
