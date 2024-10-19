@@ -162,6 +162,23 @@ class _DialogViewState extends State<DialogView> {
                   text: "Paiement dialog",
                   author: "Tech Pastor",
                   onTap: () => PaiementDialog.paiementDialog(context)),
+              CustomButton(
+                text: "Loading dialog", 
+                author: "LeScientifique",
+                onTap: () => LoadingDialog.showLoadingDialog(
+                  context,
+                  message: "Loading..."),
+              ),
+              CustomButton(
+                text: "Tutorial dialog",
+                author: "LeScientifique",
+                onTap: () => TutorialDialog.showTutorialDialog(
+                  context,
+                  steps: [
+                    "Cliquer sur un composant pour un prewiew",
+                    "Cliquer sur le bouton en haut à droite pour contribuer"
+                  ]),
+              ),
             ],
           ),
         ),
