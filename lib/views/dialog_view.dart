@@ -163,6 +163,11 @@ class _DialogViewState extends State<DialogView> {
                   author: "Tech Pastor",
                   onTap: () => PaiementDialog.paiementDialog(context)),
               CustomButton(
+                text: "Butterfly Dialog",
+                author: "dev1abhi",
+                onTap: () => ButterflyDialogManager.showFlyingButterfliesDialog(context),
+              ),
+              CustomButton(
                 text: "Loading dialog", 
                 author: "LeScientifique",
                 onTap: () => LoadingDialog.showLoadingDialog(
