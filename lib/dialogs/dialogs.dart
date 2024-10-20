@@ -12,3 +12,5 @@ export "switch_theme_dialog.dart";
 export "warning_alert.dart";
 export "yes_no_dialog.dart";
 export "butterfly_alert.dart";
+export "loading_dialog.dart";
+export "tutorial_dialog.dart";

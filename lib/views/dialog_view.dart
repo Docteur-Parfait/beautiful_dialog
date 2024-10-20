@@ -167,6 +167,23 @@ class _DialogViewState extends State<DialogView> {
                 author: "dev1abhi",
                 onTap: () => ButterflyDialogManager.showFlyingButterfliesDialog(context),
               ),
+              CustomButton(
+                text: "Loading dialog", 
+                author: "LeScientifique",
+                onTap: () => LoadingDialog.showLoadingDialog(
+                  context,
+                  message: "Loading..."),
+              ),
+              CustomButton(
+                text: "Tutorial dialog",
+                author: "LeScientifique",
+                onTap: () => TutorialDialog.showTutorialDialog(
+                  context,
+                  steps: [
+                    "Cliquer sur un composant pour un prewiew",
+                    "Cliquer sur le bouton en haut à droite pour contribuer"
+                  ]),
+              ),
             ],
           ),
         ),
