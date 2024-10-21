@@ -50,7 +50,7 @@ class TutorialDialog {
                   ),
                   child: const Text('Terminer'),
                   onPressed: () {
-                    Navigator.of(context).pop(); 
+                    Navigator.of(context).pop();
                   },
                 ),
               ],

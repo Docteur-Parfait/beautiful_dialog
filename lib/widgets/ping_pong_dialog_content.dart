@@ -214,36 +214,35 @@ class PingPongDialogContentState extends State<PingPongDialogContent> {
                 ),
                 // Game area
                 Container(
-                  height: 300,
-                  width: 460,
-                  key: _keyContainer,
-                  decoration: BoxDecoration(
-                    gradient: const RadialGradient(
-                      colors: [Color(0xffffffff), Color(0xfff1efef)],
-                      stops: [0.25, 0.75],
-                      center: Alignment.center,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    child: GestureDetector(
-                      onHorizontalDragUpdate: onHorizontalDrag,
-                      onTapDown: onTapDown,
-                      child: CustomPaint(
-                        painter: PingPongPainter(
-                          ballX: ballX,
-                          ballY: ballY,
-                          paddleX: paddleX,
-                          paddleWidth: paddleWidth,
-                          isGameOver: isGameOver,
-                        ),
-                        child:
-                        Container(), // The CustomPaint will render the game
+                    height: 300,
+                    width: 460,
+                    key: _keyContainer,
+                    decoration: BoxDecoration(
+                      gradient: const RadialGradient(
+                        colors: [Color(0xffffffff), Color(0xfff1efef)],
+                        stops: [0.25, 0.75],
+                        center: Alignment.center,
                       ),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                  )
-                ),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onHorizontalDragUpdate: onHorizontalDrag,
+                        onTapDown: onTapDown,
+                        child: CustomPaint(
+                          painter: PingPongPainter(
+                            ballX: ballX,
+                            ballY: ballY,
+                            paddleX: paddleX,
+                            paddleWidth: paddleWidth,
+                            isGameOver: isGameOver,
+                          ),
+                          child:
+                              Container(), // The CustomPaint will render the game
+                        ),
+                      ),
+                    )),
                 const SizedBox(height: 20),
                 // Display the score
                 Text('Score: $score', style: const TextStyle(fontSize: 16)),

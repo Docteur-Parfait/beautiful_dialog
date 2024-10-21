@@ -27,7 +27,7 @@ class StackedDialogs {
     showGenericDialog(context);
   }
 
-  static void showGenericDialog(BuildContext context, [String ?message]) {
+  static void showGenericDialog(BuildContext context, [String? message]) {
     count++;
     showGeneralDialog(
       context: context,
@@ -46,11 +46,12 @@ class StackedDialogs {
               ..translate(0.0, shakeValue), // Apply shake translation
             alignment: Alignment.center,
             child: BackdropFilter(
-              filter: count == 0 ? ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0) : ImageFilter.blur(sigmaX: 0.25, sigmaY: 0.25),
-              child: Stack(
-                children: _dialogs,
-              )
-            ),
+                filter: count == 0
+                    ? ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0)
+                    : ImageFilter.blur(sigmaX: 0.25, sigmaY: 0.25),
+                child: Stack(
+                  children: _dialogs,
+                )),
           ),
         );
       },
