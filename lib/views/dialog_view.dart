@@ -1,3 +1,4 @@
+import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
@@ -151,7 +152,7 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
-                  text: " Discard Changes dialog",
+                  text: "Discard Changes dialog",
                   author: "Shubhanshu-02",
                   onTap: () => DiscardChangesDialog.showDiscardDialog(context)),
               CustomButton(
@@ -165,30 +166,41 @@ class _DialogViewState extends State<DialogView> {
               CustomButton(
                 text: "Butterfly Dialog",
                 author: "dev1abhi",
-                onTap: () => ButterflyDialogManager.showFlyingButterfliesDialog(context),
+                onTap: () =>
+                    ButterflyDialogManager.showFlyingButterfliesDialog(context),
               ),
               CustomButton(
-                text: "Loading dialog", 
+                text: "Loading dialog",
                 author: "LeScientifique",
-                onTap: () => LoadingDialog.showLoadingDialog(
-                  context,
-                  message: "Loading..."),
+                onTap: () => LoadingDialog.showLoadingDialog(context,
+                    message: "Loading..."),
               ),
               CustomButton(
                 text: "Tutorial dialog",
                 author: "LeScientifique",
-                onTap: () => TutorialDialog.showTutorialDialog(
+                onTap: () => TutorialDialog.showTutorialDialog(context, steps: [
+                  "Cliquer sur un composant pour un prewiew",
+                  "Cliquer sur le bouton en haut à droite pour contribuer"
+                ]),
+              ),
+              CustomButton(
+                text: "Animated Confirmation Dialog",
+                author: "Tech Apostle",
+                onTap: () =>
+                    AnimatedConfirmationDialog.showAnimatedConfirmationDialog(
                   context,
-                  steps: [
-                    "Cliquer sur un composant pour un prewiew",
-                    "Cliquer sur le bouton en haut à droite pour contribuer"
-                  ]),
+                  title: "Confirm Action",
+                  message: "Are you sure you want to proceed with this action?",
+                  onConfirm: () {},
+                  onCancel: () {},
+                ),
               ),
               CustomButton(
                 text: "Widget Tour Dialog",
                 author: "LeScientifique",
                 onTap: () {
-                  List<WidgetItem> widgetItems = WidgetExtractor.extractWidgetItemsFromContext(context);
+                  List<WidgetItem> widgetItems =
+                      WidgetExtractor.extractWidgetItemsFromContext(context);
                   if (widgetItems.isNotEmpty) {
                     WidgetTourDialog.showWidgetTourDialog(
                       context,
@@ -197,7 +209,9 @@ class _DialogViewState extends State<DialogView> {
                   } else {
                     // Afficher un message d'erreur ou gérer l'absence de widgets
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Aucun widget disponible pour le tour.')),
+                      const SnackBar(
+                          content:
+                              Text('Aucun widget disponible pour le tour.')),
                     );
                   }
                 },
