@@ -184,6 +184,24 @@ class _DialogViewState extends State<DialogView> {
                     "Cliquer sur le bouton en haut à droite pour contribuer"
                   ]),
               ),
+              CustomButton(
+                text: "Widget Tour Dialog",
+                author: "LeScientifique",
+                onTap: () {
+                  List<WidgetItem> widgetItems = WidgetExtractor.extractWidgetItemsFromContext(context);
+                  if (widgetItems.isNotEmpty) {
+                    WidgetTourDialog.showWidgetTourDialog(
+                      context,
+                      widgetItems: widgetItems,
+                    );
+                  } else {
+                    // Afficher un message d'erreur ou gérer l'absence de widgets
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Aucun widget disponible pour le tour.')),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),

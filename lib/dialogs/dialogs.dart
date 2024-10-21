@@ -14,3 +14,4 @@ export "yes_no_dialog.dart";
 export "butterfly_alert.dart";
 export "loading_dialog.dart";
 export "tutorial_dialog.dart";
+export "widget_tour_dialog.dart";
