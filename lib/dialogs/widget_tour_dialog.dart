@@ -59,7 +59,6 @@ class WidgetTourDialog {
         );
       },
     );
-
   }
 }
 
@@ -91,4 +90,3 @@ class WidgetExtractor {
     return widgetItems;
   }
 }
-

@@ -7,10 +7,13 @@ class ButterflyDialogManager {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return const Center( // Ensure the dialog content is centered
+        return const Center(
+          // Ensure the dialog content is centered
           child: Material(
-            type: MaterialType.transparency, // Makes background of the dialog transparent
-            child: FlyingButterfliesDialog(), // Return the dialog content directly
+            type: MaterialType
+                .transparency, // Makes background of the dialog transparent
+            child:
+                FlyingButterfliesDialog(), // Return the dialog content directly
           ),
         );
       },

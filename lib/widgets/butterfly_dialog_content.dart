@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -7,10 +5,9 @@ class FlyingButterfliesDialog extends StatefulWidget {
   const FlyingButterfliesDialog({super.key});
 
   @override
-  _FlyingButterfliesDialogState createState() => _FlyingButterfliesDialogState();
+  _FlyingButterfliesDialogState createState() =>
+      _FlyingButterfliesDialogState();
 }
-
-
 
 class _FlyingButterfliesDialogState extends State<FlyingButterfliesDialog>
     with SingleTickerProviderStateMixin {
@@ -53,10 +50,8 @@ class _FlyingButterfliesDialogState extends State<FlyingButterfliesDialog>
               ),
             ),
             Positioned(
-
               left: 50,
               bottom: 160,
-
               child: Text(
                 "Enjoy the Butterflies!",
                 textAlign: TextAlign.center,
@@ -74,7 +69,8 @@ class _FlyingButterfliesDialogState extends State<FlyingButterfliesDialog>
                   return Stack(
                     children: List.generate(5, (index) {
                       final xOffset = _animation.value * 300;
-                      final yOffset = sin(_animation.value * 2 * pi + index) * 200 + 150;
+                      final yOffset =
+                          sin(_animation.value * 2 * pi + index) * 200 + 150;
 
                       return Positioned(
                         left: xOffset,
@@ -116,15 +112,16 @@ class ButterflyClipper extends CustomClipper<Path> {
 
     // left wing
     path.moveTo(size.width / 2, size.height / 2);
-    path.quadraticBezierTo(0, size.height * 0.25, size.width * 0.15, size.height / 2);
+    path.quadraticBezierTo(
+        0, size.height * 0.25, size.width * 0.15, size.height / 2);
     path.quadraticBezierTo(0, size.height * 0.75, size.width / 2, size.height);
 
     //right wing
     path.moveTo(size.width / 2, size.height / 2);
-    path.quadraticBezierTo(size.width, size.height * 0.25, size.width * 0.85, size.height / 2);
-    path.quadraticBezierTo(size.width, size.height * 0.75, size.width / 2, size.height);
-
-
+    path.quadraticBezierTo(
+        size.width, size.height * 0.25, size.width * 0.85, size.height / 2);
+    path.quadraticBezierTo(
+        size.width, size.height * 0.75, size.width / 2, size.height);
 
     path.close();
 
@@ -134,5 +131,3 @@ class ButterflyClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
-
-
