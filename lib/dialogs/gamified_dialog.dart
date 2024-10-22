@@ -33,7 +33,7 @@ class GamifiedDialog {
 
     void playBackgroundMusic() {
       backgroundMusicPlayer.setReleaseMode(ReleaseMode.loop);
-      backgroundMusicPlayer.play(AssetSource('background_music.mp3'));
+      backgroundMusicPlayer.play(AssetSource('background_music.ogg'));
     }
 
     void stopBackgroundMusic() {
@@ -139,11 +139,11 @@ class GamifiedDialog {
                                 targetNumber = Random().nextInt(10) + 1;
                                 timeLeft = 30;
                               });
-                              playSound('correct.mp3');
+                              playSound('correct.ogg');
                               BotToast.showText(
                                   text: "Correct! New number generated.");
                             } else {
-                              playSound('wrong.mp3');
+                              playSound('wrong.ogg');
                               BotToast.showText(
                                   text: "Wrong guess. Try again!");
                             }
@@ -181,11 +181,11 @@ class GamifiedDialog {
                                 targetNumber = Random().nextInt(10) + 1;
                                 timeLeft = 30;
                               });
-                              playSound('correct.mp3');
+                              playSound('correct.ogg');
                               BotToast.showText(
                                   text: "Correct! New number generated.");
                             } else {
-                              playSound('wrong.mp3');
+                              playSound('wrong.ogg');
                               BotToast.showText(
                                   text: "Wrong guess. Try again!");
                             }
