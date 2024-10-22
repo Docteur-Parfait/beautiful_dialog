@@ -1,10 +1,24 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 
 class TimerDialog {
-  static void showTimerDialog(BuildContext context, {int seconds = 5}) {
+  static void showTimerDialog(BuildContext context, {int seconds = 5, Function? onComplete}) {
     int remainingSeconds = seconds;
     Timer? timer;
+    bool isPaused = false;
+    final player = AudioPlayer();
+
+    void playSound(String source) async {
+      try {
+        await player.play(AssetSource(source));
+      } catch (e) {
+        if (kDebugMode) {
+          print('AudioPlayers Exception: $e');
+        }
+      }
+    }
 
     showDialog(
       context: context,
@@ -13,16 +27,25 @@ class TimerDialog {
         return StatefulBuilder(
           builder: (context, setState) {
             // Initialize the timer only once
-            timer ??= Timer.periodic(const Duration(seconds: 1), (timer) {
-              if (remainingSeconds == 0) {
-                timer.cancel();
-                Navigator.of(context).pop();
-              } else {
-                setState(() {
-                  remainingSeconds--;
-                });
-              }
-            });
+            if (timer == null) {
+              playSound('assets/start_sound.mp3');
+              timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+                if (!isPaused) {
+                  if (remainingSeconds == 0) {
+                    timer.cancel();
+                    playSound('assets/end_sound.mp3');
+                    Navigator.of(context).pop();
+                    if (onComplete != null) {
+                      onComplete();
+                    }
+                  } else {
+                    setState(() {
+                      remainingSeconds--;
+                    });
+                  }
+                }
+              });
+            }
 
             return WillPopScope(
               onWillPop: () async => false,
@@ -86,6 +109,17 @@ class TimerDialog {
                 actions: [
                   TextButton(
                     onPressed: () {
+                      setState(() {
+                        isPaused = !isPaused;
+                      });
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.orange,
+                    ),
+                    child: Text(isPaused ? "Resume" : "Pause"),
+                  ),
+                  TextButton(
+                    onPressed: () {
                       timer?.cancel();
                       Navigator.of(context).pop();
                     },
@@ -102,6 +136,7 @@ class TimerDialog {
       },
     ).then((_) {
       timer?.cancel();
+      player.dispose();
     });
   }
 }
