@@ -1,6 +1,5 @@
 import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
-import 'package:beautiful_dialog/dialogs/eventcard_dialog.dart';
 import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
