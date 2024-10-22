@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'dart:html' as html;
+import 'package:wave/config.dart';
+import 'package:wave/wave.dart';
 
 class VoiceInputDialog {
   static void showVoiceInputDialog(BuildContext context) {
-    stt.SpeechToText speech = stt.SpeechToText();
     bool isListening = false;
     String recognizedWords = '';
     bool speechAvailable = false;
+    html.MediaStream? mediaStream;
+
+    Future<bool> requestMicrophonePermission() async {
+      try {
+        mediaStream = await html.window.navigator.getUserMedia(audio: true);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
 
     showDialog(
       context: context,
@@ -17,18 +28,28 @@ class VoiceInputDialog {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              title: const Text("Voice Input"),
+              title: const Text(
+                "Voice Input",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(isListening ? "Listening..." : "Press the mic to speak"),
+                  Text(
+                    isListening ? "Listening..." : "Press the mic to speak",
+                    style: const TextStyle(fontSize: 18),
+                  ),
                   const SizedBox(height: 20),
-                  if (isListening)
-                    const CircularProgressIndicator(),
+                  if (isListening) const CircularProgressIndicator(),
                   const SizedBox(height: 20),
                   Text(
                     recognizedWords,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   if (!speechAvailable)
                     const Padding(
@@ -38,6 +59,25 @@ class VoiceInputDialog {
                         style: TextStyle(color: Colors.red),
                       ),
                     ),
+                  if (isListening)
+                    SizedBox(
+                      height: 100,
+                      child: WaveWidget(
+                        config: CustomConfig(
+                          gradients: [
+                            [Colors.blue, Colors.lightBlueAccent],
+                            [Colors.blueAccent, Colors.blue],
+                          ],
+                          durations: [35000, 19440],
+                          heightPercentages: [0.20, 0.23],
+                          blur: const MaskFilter.blur(BlurStyle.solid, 10),
+                          gradientBegin: Alignment.bottomLeft,
+                          gradientEnd: Alignment.topRight,
+                        ),
+                        waveAmplitude: 0,
+                        size: const Size(double.infinity, double.infinity),
+                      ),
+                    ),
                 ],
               ),
               actions: [
@@ -45,38 +85,64 @@ class VoiceInputDialog {
                   icon: Icon(isListening ? Icons.mic_off : Icons.mic),
                   onPressed: () async {
                     if (!isListening) {
-                      bool available = await speech.initialize();
-                      setState(() => speechAvailable = available);
-                      if (available) {
-                        setState(() => isListening = true);
-                        speech.listen(
-                          onResult: (result) {
-                            setState(() {
-                              recognizedWords = result.recognizedWords;
-                            });
-                          },
-                        );
+                      bool permissionGranted =
+                          await requestMicrophonePermission();
+                      if (!permissionGranted) {
+                        setState(() => speechAvailable = false);
+                        return;
                       }
+                      setState(() => speechAvailable = true);
+                      setState(() => isListening = true);
+                      // Start recording and handle the result
+                      // You can use mediaStream to access the audio data
                     } else {
                       setState(() => isListening = false);
-                      speech.stop();
+                      // Stop recording and handle the result
+                      mediaStream?.getTracks().forEach((track) {
+                        track.stop();
+                      });
                     }
                   },
                 ),
                 TextButton(
-                  child: const Text("Cancel"),
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.orange,
+                  ),
                   onPressed: () {
                     if (isListening) {
-                      speech.stop();
+                      mediaStream?.getTracks().forEach((track) {
+                        track.stop();
+                      });
+                    }
+                    setState(() {
+                      recognizedWords = '';
+                      isListening = false;
+                    });
+                  },
+                  child: const Text("Retry"),
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.red,
+                  ),
+                  onPressed: () {
+                    if (isListening) {
+                      mediaStream?.getTracks().forEach((track) {
+                        track.stop();
+                      });
                     }
                     Navigator.of(context).pop();
                   },
+                  child: const Text("Cancel"),
                 ),
                 TextButton(
-                  child: const Text("OK"),
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.green,
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop(recognizedWords);
                   },
+                  child: const Text("OK"),
                 ),
               ],
             );
