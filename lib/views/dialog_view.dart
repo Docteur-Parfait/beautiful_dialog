@@ -1,4 +1,5 @@
 import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
+import 'package:beautiful_dialog/dialogs/gamified_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
@@ -105,6 +106,11 @@ class _DialogViewState extends State<DialogView> {
                   message:
                       "Congrats! You will now enjoy our new updates for next year.",
                 ),
+              ),
+              CustomButton(
+                text: "Gamified Dialog",
+                author: "Tech Apostle",
+                onTap: () => GamifiedDialog.showGamifiedDialog(context),
               ),
               CustomButton(
                 text: "Expanding alert",
