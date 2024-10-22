@@ -4,15 +4,41 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 
 class TimerDialog {
-  static void showTimerDialog(BuildContext context, {int seconds = 5, Function? onComplete}) {
+  static void showTimerDialog(BuildContext context,
+      {int seconds = 5, Function? onComplete}) {
     int remainingSeconds = seconds;
     Timer? timer;
     bool isPaused = false;
     final player = AudioPlayer();
 
-    void playSound(String source) async {
+    void playSound(String source, {Function? onComplete}) async {
       try {
         await player.play(AssetSource(source));
+        player.onPlayerComplete.listen((event) {
+          if (onComplete != null) {
+            onComplete();
+          }
+        });
+      } catch (e) {
+        if (kDebugMode) {
+          print('AudioPlayers Exception: $e');
+        }
+      }
+    }
+
+    void pauseSound() async {
+      try {
+        await player.pause();
+      } catch (e) {
+        if (kDebugMode) {
+          print('AudioPlayers Exception: $e');
+        }
+      }
+    }
+
+    void resumeSound() async {
+      try {
+        await player.resume();
       } catch (e) {
         if (kDebugMode) {
           print('AudioPlayers Exception: $e');
@@ -26,18 +52,18 @@ class TimerDialog {
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, setState) {
-            // Initialize the timer only once
             if (timer == null) {
-              playSound('assets/start_sound.mp3');
+              playSound('start_sound.ogg');
               timer = Timer.periodic(const Duration(seconds: 1), (timer) {
                 if (!isPaused) {
                   if (remainingSeconds == 0) {
                     timer.cancel();
-                    playSound('assets/end_sound.mp3');
-                    Navigator.of(context).pop();
-                    if (onComplete != null) {
-                      onComplete();
-                    }
+                    playSound('end_sound.ogg', onComplete: () {
+                      Navigator.of(context).pop();
+                      if (onComplete != null) {
+                        onComplete();
+                      }
+                    });
                   } else {
                     setState(() {
                       remainingSeconds--;
@@ -111,6 +137,11 @@ class TimerDialog {
                     onPressed: () {
                       setState(() {
                         isPaused = !isPaused;
+                        if (isPaused) {
+                          pauseSound();
+                        } else {
+                          resumeSound();
+                        }
                       });
                     },
                     style: TextButton.styleFrom(
