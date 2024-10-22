@@ -2,6 +2,7 @@ import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
+import 'package:beautiful_dialog/dialogs/timer_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -186,8 +187,13 @@ class _DialogViewState extends State<DialogView> {
               ),
               CustomButton(
                 text: "Multi-step Dialog",
-                author: "TechApostle",
+                author: "Tech Apostle",
                 onTap: () => MultiStepDialog.showMultiStepDialog(context),
+              ),
+              CustomButton(
+                text: "Timer Dialog",
+                author: "Tech Apostle",
+                onTap: () => TimerDialog.showTimerDialog(context, seconds: 5),
               ),
               CustomButton(
                 text: "Animated Confirmation Dialog",
