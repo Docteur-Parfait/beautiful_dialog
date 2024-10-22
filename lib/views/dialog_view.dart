@@ -1,5 +1,7 @@
 import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
+import 'package:beautiful_dialog/dialogs/eventcard_dialog.dart';
+import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -182,6 +184,11 @@ class _DialogViewState extends State<DialogView> {
                   "Cliquer sur un composant pour un prewiew",
                   "Cliquer sur le bouton en haut à droite pour contribuer"
                 ]),
+              ),
+              CustomButton(
+                text: "Multi-step Dialog",
+                author: "TechApostle",
+                onTap: () => MultiStepDialog.showMultiStepDialog(context),
               ),
               CustomButton(
                 text: "Animated Confirmation Dialog",
