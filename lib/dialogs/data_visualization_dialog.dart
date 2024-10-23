@@ -3,7 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/rendering.dart';
 import 'dart:typed_data';
-import 'dart:io' show Platform;
+import 'dart:io' if (dart.library.html) 'dart:html' as html;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:html' as html;
@@ -203,7 +203,7 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
       if (byteData != null) {
         final Uint8List pngBytes = byteData.buffer.asUint8List();
         if (kIsWeb) {
-          // Check if the platform is web
+          // Web-specific code using dart:html
           final blob = html.Blob([pngBytes], 'image/png');
           final url = html.Url.createObjectUrlFromBlob(blob);
 
@@ -216,7 +216,7 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
           // Clean up
           html.Url.revokeObjectUrl(url);
         } else {
-          // Handle non-web export logic here (if needed)
+          // Fallback for other platforms
           throw UnsupportedError(
               'Exporting charts is not supported on this platform.');
         }
