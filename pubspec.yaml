@@ -41,6 +41,7 @@ dependencies:
   audioplayers: ^6.1.0
   speech_to_text: ^7.0.0
   wave: ^0.2.2
+  fl_chart: ^0.69.0
 
 dev_dependencies:
   flutter_test:
