@@ -1,5 +1,9 @@
+import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
+import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
+import 'package:beautiful_dialog/dialogs/timer_dialog.dart';
+import 'package:beautiful_dialog/dialogs/voice_input_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -151,7 +155,7 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
-                  text: " Discard Changes dialog",
+                  text: "Discard Changes dialog",
                   author: "Shubhanshu-02",
                   onTap: () => DiscardChangesDialog.showDiscardDialog(context)),
               CustomButton(
@@ -162,6 +166,74 @@ class _DialogViewState extends State<DialogView> {
                   text: "Paiement dialog",
                   author: "Tech Pastor",
                   onTap: () => PaiementDialog.paiementDialog(context)),
+              CustomButton(
+                text: "Butterfly Dialog",
+                author: "dev1abhi",
+                onTap: () =>
+                    ButterflyDialogManager.showFlyingButterfliesDialog(context),
+              ),
+              CustomButton(
+                text: "Loading dialog",
+                author: "LeScientifique",
+                onTap: () => LoadingDialog.showLoadingDialog(context,
+                    message: "Loading..."),
+              ),
+              CustomButton(
+                text: "Tutorial dialog",
+                author: "LeScientifique",
+                onTap: () => TutorialDialog.showTutorialDialog(context, steps: [
+                  "Cliquer sur un composant pour un prewiew",
+                  "Cliquer sur le bouton en haut à droite pour contribuer"
+                ]),
+              ),
+              CustomButton(
+                text: "Multi-step Dialog",
+                author: "Tech Apostle",
+                onTap: () => MultiStepDialog.showMultiStepDialog(context),
+              ),
+              CustomButton(
+                text: "Timer Dialog",
+                author: "Tech Apostle",
+                onTap: () => TimerDialog.showTimerDialog(context, seconds: 5),
+              ),
+              CustomButton(
+                text: "Voice Input Dialog",
+                author: "TechApostle",
+                onTap: () => VoiceInputDialog.showVoiceInputDialog(context),
+              ),
+              CustomButton(
+                text: "Animated Confirmation Dialog",
+                author: "Tech Apostle",
+                onTap: () =>
+                    AnimatedConfirmationDialog.showAnimatedConfirmationDialog(
+                  context,
+                  title: "Confirm Action",
+                  message: "Are you sure you want to proceed with this action?",
+                  onConfirm: () {},
+                  onCancel: () {},
+                ),
+              ),
+              CustomButton(
+                text: "Widget Tour Dialog",
+                author: "LeScientifique",
+                onTap: () {
+                  List<WidgetItem> widgetItems =
+                      WidgetExtractor.extractWidgetItemsFromContext(context);
+                  if (widgetItems.isNotEmpty) {
+                    WidgetTourDialog.showWidgetTourDialog(
+                      context,
+                      widgetItems: widgetItems,
+                    );
+                  } else {
+                    // Afficher un message d'erreur ou gérer l'absence de widgets
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content:
+                              Text('Aucun widget disponible pour le tour.')),
+                    );
+                  }
+                },
+              ),
               CustomButton(
                   text: "Avatar picker dialog",
                   author: "Prosmaw",

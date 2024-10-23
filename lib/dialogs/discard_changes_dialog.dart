@@ -24,13 +24,13 @@ class DiscardChangesDialog {
                 Container(
                   width: double.infinity,
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 66, 66, 66), 
+                    color: Color.fromARGB(255, 66, 66, 66),
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(12), 
+                      topLeft: Radius.circular(12),
                       topRight: Radius.circular(12),
                     ),
                   ),
-                  padding: const EdgeInsets.fromLTRB(16,8,8,8),
+                  padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -52,7 +52,7 @@ class DiscardChangesDialog {
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.fromLTRB(18,9, 18,0),
+                  padding: EdgeInsets.fromLTRB(18, 9, 18, 0),
                   child: Text(
                     "This will delete all edits since you last saved",
                     style: TextStyle(
@@ -66,13 +66,15 @@ class DiscardChangesDialog {
                   thickness: 0.5,
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(22,0,22,8),
+                  padding: const EdgeInsets.fromLTRB(22, 0, 22, 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Color.fromARGB(255, 189, 189, 189), width: 1.5),
+                          side: const BorderSide(
+                              color: Color.fromARGB(255, 189, 189, 189),
+                              width: 1.5),
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 15),
                           shape: RoundedRectangleBorder(

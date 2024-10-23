@@ -42,7 +42,7 @@ class ExpandingDialogState extends State<ExpandingDialog>
     if (_controller.status == AnimationStatus.dismissed) {
       _rotationY = -0.05; //ll rotation
       _controller.forward();
-    }else {
+    } else {
       _rotationY = 0.0;
       _controller.reverse();
     }
@@ -56,8 +56,7 @@ class ExpandingDialogState extends State<ExpandingDialog>
 
   @override
   Widget build(BuildContext context) {
-    return
-      AnimatedBuilder(
+    return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
         return Transform(
@@ -71,11 +70,10 @@ class ExpandingDialogState extends State<ExpandingDialog>
               side: const BorderSide(
                   color: Colors.black, style: BorderStyle.solid, width: 4),
             ),
-            child:
-            GestureDetector(
+            child: GestureDetector(
               onPanUpdate: _onUpdate,
               onTap: _onUpdate,
-              child:MouseRegion(
+              child: MouseRegion(
                 cursor: SystemMouseCursors.click,
                 onEnter: _onEnter,
                 onExit: _onExit,
@@ -141,7 +139,8 @@ class ExpandingDialogState extends State<ExpandingDialog>
                             child: const Text(
                               "Done",
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 14, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.white),
                             ),
                           ),
                         ],
