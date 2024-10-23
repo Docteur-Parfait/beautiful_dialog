@@ -42,6 +42,7 @@ dependencies:
   speech_to_text: ^7.0.0
   wave: ^0.2.2
   fl_chart: ^0.69.0
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:

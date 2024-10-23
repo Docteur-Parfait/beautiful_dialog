@@ -1,5 +1,6 @@
 import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/data_visualization_dialog.dart';
+import 'package:beautiful_dialog/dialogs/gamified_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
@@ -109,6 +110,11 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
+                text: "Gamified Dialog",
+                author: "Tech Apostle",
+                onTap: () => GamifiedDialog.showGamifiedDialog(context),
+              ),
+              CustomButton(
                 text: "Expanding alert",
                 author: "littleDarkBug",
                 onTap: () => ExpandingDialogClass.showExpandingDialog(
@@ -127,7 +133,7 @@ class _DialogViewState extends State<DialogView> {
               ),
               CustomButton(
                   text: "Feedback dialog",
-                  author: "prosmaw",
+                  author: "Prosmaw",
                   onTap: () => FeedbackDialog.showFeedbackDialog(context)),
               CustomButton(
                 text: "Switch theme alert",
@@ -199,7 +205,7 @@ class _DialogViewState extends State<DialogView> {
               ),
               CustomButton(
                 text: "Voice Input Dialog",
-                author: "TechApostle",
+                author: "Tech Apostle",
                 onTap: () => VoiceInputDialog.showVoiceInputDialog(context),
               ),
               CustomButton(
@@ -242,6 +248,10 @@ class _DialogViewState extends State<DialogView> {
                   }
                 },
               ),
+              CustomButton(
+                  text: "Avatar picker dialog",
+                  author: "Prosmaw",
+                  onTap: () => AvatarPicker.showAvatarPickerDialog(context)),
             ],
           ),
         ),

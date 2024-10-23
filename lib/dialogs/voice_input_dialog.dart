@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
+// import 'dart:html' as html;
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
@@ -8,11 +8,11 @@ class VoiceInputDialog {
     bool isListening = false;
     String recognizedWords = '';
     bool speechAvailable = false;
-    html.MediaStream? mediaStream;
+    // html.MediaStream? mediaStream;
 
     Future<bool> requestMicrophonePermission() async {
       try {
-        mediaStream = await html.window.navigator.getUserMedia(audio: true);
+        // mediaStream = await html.window.navigator.getUserMedia(audio: true);
         return true;
       } catch (e) {
         return false;
@@ -28,12 +28,14 @@ class VoiceInputDialog {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              title: const Text(
-                "Voice Input",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blueAccent,
+              title: const Center(
+                child: Text(
+                  "Voice Input",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueAccent,
+                  ),
                 ),
               ),
               content: Column(
@@ -98,9 +100,9 @@ class VoiceInputDialog {
                     } else {
                       setState(() => isListening = false);
                       // Stop recording and handle the result
-                      mediaStream?.getTracks().forEach((track) {
-                        track.stop();
-                      });
+                      // mediaStream?.getTracks().forEach((track) {
+                      //   track.stop();
+                      // });
                     }
                   },
                 ),
@@ -110,9 +112,9 @@ class VoiceInputDialog {
                   ),
                   onPressed: () {
                     if (isListening) {
-                      mediaStream?.getTracks().forEach((track) {
-                        track.stop();
-                      });
+                      // mediaStream?.getTracks().forEach((track) {
+                      //   track.stop();
+                      // });
                     }
                     setState(() {
                       recognizedWords = '';
@@ -127,9 +129,9 @@ class VoiceInputDialog {
                   ),
                   onPressed: () {
                     if (isListening) {
-                      mediaStream?.getTracks().forEach((track) {
-                        track.stop();
-                      });
+                      // mediaStream?.getTracks().forEach((track) {
+                      //   track.stop();
+                      // });
                     }
                     Navigator.of(context).pop();
                   },
