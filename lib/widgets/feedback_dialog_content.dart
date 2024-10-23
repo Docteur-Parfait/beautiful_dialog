@@ -16,9 +16,9 @@ class _FeedbackDialogState extends State<FeedbackDialogContent> {
   TextEditingController commentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.sizeOf(context).width;
+    //double width = MediaQuery.sizeOf(context).width;
     return Container(
-      width: width * 0.25,
+      //width: width * 0.25,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: SingleChildScrollView(

@@ -15,14 +15,14 @@ class WidgetTourDialog {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: Text('Tour des Widgets'),
+              title: const Text('Tour des Widgets'),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text('Widget ${currentIndex + 1}/${widgetItems.length}'),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(widgetItems[currentIndex].description),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   widgetItems[currentIndex].widget,
                 ],
               ),
@@ -35,7 +35,7 @@ class WidgetTourDialog {
                           });
                         }
                       : null,
-                  child: Text('Précédent'),
+                  child: const Text('Précédent'),
                 ),
                 TextButton(
                   onPressed: currentIndex < widgetItems.length - 1
@@ -45,10 +45,10 @@ class WidgetTourDialog {
                           });
                         }
                       : null,
-                  child: Text('Suivant'),
+                  child: const Text('Suivant'),
                 ),
                 TextButton(
-                  child: Text('Fermer'),
+                  child: const Text('Fermer'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
