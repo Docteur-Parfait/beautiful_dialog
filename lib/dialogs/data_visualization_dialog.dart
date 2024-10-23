@@ -1,3 +1,5 @@
+// ignore_for_file: library_prefixes
+
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'dart:ui' as ui;
@@ -6,8 +8,11 @@ import 'dart:typed_data';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-// Conditional import for dart:html
-import 'dart:html' as html show Blob, Url, AnchorElement;
+// Conditional import for platform-specific export functionality
+import 'provider/web_export_provider.dart'
+    if (dart.library.html) 'provider/web_export_provider.dart' as webExport;
+import 'provider/mobile_export_provider.dart'
+    if (dart.library.io) 'provider/mobile_export_provider.dart' as mobileExport;
 
 class DataVisualizationDialog {
   static void showDataVisualizationDialog(BuildContext context) {
@@ -204,22 +209,19 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
       if (byteData != null) {
         final Uint8List pngBytes = byteData.buffer.asUint8List();
         if (kIsWeb) {
-          // Web-specific code using dart:html
-          final blob = html.Blob([pngBytes], 'image/png');
-          final url = html.Url.createObjectUrlFromBlob(blob);
-
-          // Create an anchor element and trigger a download
-          final anchor = html.AnchorElement(href: url)
-            ..setAttribute('download',
-                'chart_${DateTime.now().millisecondsSinceEpoch}.png')
-            ..click();
-
-          // Clean up
-          html.Url.revokeObjectUrl(url);
+          // Use web export functionality
+          await webExport.exportBytes(
+            bytes: pngBytes,
+            fileName: 'chart_${DateTime.now().millisecondsSinceEpoch}.png',
+            mimeType: 'image/png',
+          );
         } else {
-          // Handle non-web export logic here (if needed)
-          throw UnsupportedError(
-              'Exporting charts is not supported on this platform.');
+          // Use mobile export functionality
+          await mobileExport.exportBytes(
+            bytes: pngBytes,
+            fileName: 'chart_${DateTime.now().millisecondsSinceEpoch}.png',
+            mimeType: 'image/png',
+          );
         }
 
         // Show success message using bot_toast
