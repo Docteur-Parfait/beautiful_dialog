@@ -204,7 +204,7 @@ class _DialogViewState extends State<DialogView> {
               ),
               CustomButton(
                 text: "Voice Input Dialog",
-                author: "TechApostle",
+                author: "Tech Apostle",
                 onTap: () => VoiceInputDialog.showVoiceInputDialog(context),
               ),
               CustomButton(
