@@ -1,5 +1,6 @@
 // ignore_for_file: library_prefixes
 
+import 'package:beautiful_dialog/dialogs/provider/export_stub.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'dart:ui' as ui;
@@ -7,10 +8,6 @@ import 'package:flutter/rendering.dart';
 import 'dart:typed_data';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-
-// Conditional import for platform-specific export functionality
-import 'provider/web_export_provider.dart' as webExport;
-import 'provider/mobile_export_provider.dart' as mobileExport;
 
 class DataVisualizationDialog {
   static void showDataVisualizationDialog(BuildContext context) {
@@ -196,6 +193,7 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
     );
   }
 
+  // Update the DataVisualizationContent class to use the new export provider
   Future<void> _exportChart() async {
     try {
       final RenderRepaintBoundary boundary =
@@ -206,23 +204,13 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
 
       if (byteData != null) {
         final Uint8List pngBytes = byteData.buffer.asUint8List();
-        if (kIsWeb) {
-          // Use web export functionality
-          await webExport.exportBytes(
-            bytes: pngBytes,
-            fileName: 'chart_${DateTime.now().millisecondsSinceEpoch}.png',
-            mimeType: 'image/png',
-          );
-        } else {
-          // Use mobile export functionality
-          await mobileExport.exportBytes(
-            bytes: pngBytes,
-            fileName: 'chart_${DateTime.now().millisecondsSinceEpoch}.png',
-            mimeType: 'image/png',
-          );
-        }
+        final exportProvider = ExportProviderImpl();
+        await exportProvider.exportBytes(
+          bytes: pngBytes,
+          fileName: 'chart_${DateTime.now().millisecondsSinceEpoch}.png',
+          mimeType: 'image/png',
+        );
 
-        // Show success message using bot_toast
         BotToast.showText(
           text: 'Chart exported successfully!',
           duration: const Duration(seconds: 2),
@@ -230,9 +218,8 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
         );
       }
     } catch (e) {
-      // Show error message using bot_toast
       BotToast.showText(
-        text: 'Failed to export chart',
+        text: 'Failed to export chart: ${e.toString()}',
         duration: const Duration(seconds: 2),
         contentColor: Colors.red,
       );
