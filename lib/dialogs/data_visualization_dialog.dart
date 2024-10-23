@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'dart:ui' as ui;
+import 'package:flutter/rendering.dart';
+import 'dart:typed_data';
+import 'dart:html' as html;
+import 'package:bot_toast/bot_toast.dart';
 
 class DataVisualizationDialog {
   static void showDataVisualizationDialog(BuildContext context) {
@@ -28,6 +33,8 @@ class DataVisualizationContent extends StatefulWidget {
       _DataVisualizationContentState();
 }
 
+enum ChartType { line, bar, scatter, radar, pie }
+
 class _DataVisualizationContentState extends State<DataVisualizationContent> {
   bool isLineChart = true;
   bool showAvg = false;
@@ -36,6 +43,9 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
     Colors.cyan,
     Colors.blue,
   ];
+
+  ChartType currentChart = ChartType.line;
+  final GlobalKey _chartKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -59,81 +69,164 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
             ),
           ),
           Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.blue.shade50, Colors.blue.shade100],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+            child: RepaintBoundary(
+              key: _chartKey,
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.blue.shade50, Colors.blue.shade100],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Stack(
-                children: [
-                  isLineChart
-                      ? LineChart(
-                          showAvg ? avgData() : mainData(),
-                        )
-                      : BarChart(getBarChartData()),
-                  if (isLineChart)
-                    Positioned(
-                      right: 20,
-                      top: 20,
-                      child: TextButton(
-                        onPressed: () {
-                          setState(() {
-                            showAvg = !showAvg;
-                          });
-                        },
-                        child: Text(
-                          'AVG',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: showAvg
-                                ? Colors.white.withOpacity(0.5)
-                                : Colors.white,
+                child: Stack(
+                  children: [
+                    _buildCurrentChart(),
+                    if (currentChart == ChartType.line)
+                      Positioned(
+                        right: 20,
+                        top: 20,
+                        child: TextButton(
+                          onPressed: () {
+                            setState(() {
+                              showAvg = !showAvg;
+                            });
+                          },
+                          child: Text(
+                            'AVG',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: showAvg
+                                  ? Colors.white.withOpacity(0.5)
+                                  : Colors.white,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextButton(
-                  child: Text(isLineChart
-                      ? "Switch to Bar Chart"
-                      : "Switch to Line Chart"),
-                  onPressed: () {
-                    setState(() {
-                      isLineChart = !isLineChart;
-                    });
-                  },
+          _buildChartControls(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCurrentChart() {
+    switch (currentChart) {
+      case ChartType.line:
+        return LineChart(
+          showAvg ? avgData() : mainData(),
+        );
+      case ChartType.bar:
+        return BarChart(getBarChartData());
+      case ChartType.scatter:
+        return ScatterChart(getScatterChartData());
+      case ChartType.radar:
+        return RadarChart(getRadarChartData());
+      case ChartType.pie:
+        return PieChart(getPieChartData());
+    }
+  }
+
+  Widget _buildChartControls() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Wrap(
+            spacing: 8,
+            alignment: WrapAlignment.center,
+            children: [
+              _buildChartButton('Line', ChartType.line, Colors.blue),
+              _buildChartButton('Bar', ChartType.bar, Colors.green),
+              _buildChartButton('Scatter', ChartType.scatter, Colors.orange),
+              _buildChartButton('Radar', ChartType.radar, Colors.purple),
+              _buildChartButton('Pie', ChartType.pie, Colors.red),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton.icon(
+                icon: const Icon(Icons.save, color: Colors.white),
+                label:
+                    const Text("Export", style: TextStyle(color: Colors.white)),
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
                 ),
-                TextButton(
-                  child: const Text("Export as Image"),
-                  onPressed: () {
-                    // Implement export functionality here
-                  },
+                onPressed: _exportChart,
+              ),
+              TextButton.icon(
+                icon: const Icon(Icons.close, color: Colors.white),
+                label:
+                    const Text("Close", style: TextStyle(color: Colors.white)),
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.red,
                 ),
-                TextButton(
-                  child: const Text("Close"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
           ),
         ],
       ),
     );
+  }
+
+  Widget _buildChartButton(String label, ChartType type, Color color) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: currentChart == type ? color : Colors.grey,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      ),
+      onPressed: () => setState(() => currentChart = type),
+      child: Text(label),
+    );
+  }
+
+  Future<void> _exportChart() async {
+    try {
+      final RenderRepaintBoundary boundary =
+          _chartKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      final ByteData? byteData =
+          await image.toByteData(format: ui.ImageByteFormat.png);
+
+      if (byteData != null) {
+        final Uint8List pngBytes = byteData.buffer.asUint8List();
+        final blob = html.Blob([pngBytes], 'image/png');
+        final url = html.Url.createObjectUrlFromBlob(blob);
+
+        // Create an anchor element and trigger a download
+        final anchor = html.AnchorElement(href: url)
+          ..setAttribute(
+              'download', 'chart_${DateTime.now().millisecondsSinceEpoch}.png')
+          ..click();
+
+        // Clean up
+        html.Url.revokeObjectUrl(url);
+
+        // Show success message using bot_toast
+        BotToast.showText(
+          text: 'Chart exported successfully!',
+          duration: const Duration(seconds: 2),
+          contentColor: Colors.green,
+        );
+      }
+    } catch (e) {
+      // Show error message using bot_toast
+      BotToast.showText(
+        text: 'Failed to export chart',
+        duration: const Duration(seconds: 2),
+        contentColor: Colors.red,
+      );
+    }
   }
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
@@ -464,4 +557,125 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
       );
+
+  ScatterChartData getScatterChartData() {
+    return ScatterChartData(
+      scatterSpots: [
+        ScatterSpot(4, 4),
+        ScatterSpot(2, 5),
+        ScatterSpot(4, 5),
+        ScatterSpot(8, 6),
+        ScatterSpot(5, 7),
+        ScatterSpot(7, 2),
+        ScatterSpot(3, 2),
+        ScatterSpot(2, 1),
+      ],
+      titlesData: FlTitlesData(
+        show: true,
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            reservedSize: 30,
+            getTitlesWidget: bottomTitleWidgets,
+          ),
+        ),
+        leftTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            reservedSize: 42,
+            getTitlesWidget: leftTitleWidgets,
+          ),
+        ),
+        topTitles: const AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        rightTitles: const AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+      ),
+      borderData: FlBorderData(show: false),
+      gridData: const FlGridData(show: true),
+    );
+  }
+
+  RadarChartData getRadarChartData() {
+    return RadarChartData(
+      radarShape: RadarShape.circle,
+      dataSets: [
+        RadarDataSet(
+          fillColor: Colors.blue.withOpacity(0.2),
+          borderColor: Colors.blue,
+          entryRadius: 2,
+          dataEntries: [
+            const RadarEntry(value: 100),
+            const RadarEntry(value: 80),
+            const RadarEntry(value: 60),
+            const RadarEntry(value: 70),
+            const RadarEntry(value: 90),
+            const RadarEntry(value: 75),
+          ],
+        ),
+      ],
+      ticksTextStyle: const TextStyle(color: Colors.black, fontSize: 10),
+      titleTextStyle: const TextStyle(color: Colors.black, fontSize: 12),
+      radarBorderData: BorderSide(color: Colors.grey.withOpacity(0.2)),
+      titlePositionPercentageOffset: 0.2,
+      getTitle: (index, value) {
+        // Update the parameters to accept both index and value
+        switch (index) {
+          case 0:
+            return const RadarChartTitle(text: 'Sales');
+          case 1:
+            return const RadarChartTitle(text: 'Marketing');
+          case 2:
+            return const RadarChartTitle(text: 'Dev');
+          case 3:
+            return const RadarChartTitle(text: 'Design');
+          case 4:
+            return const RadarChartTitle(text: 'Support');
+          case 5:
+            return const RadarChartTitle(text: 'Tech');
+          default:
+            return const RadarChartTitle(text: '');
+        }
+      },
+    );
+  }
+
+  PieChartData getPieChartData() {
+    return PieChartData(
+      sections: [
+        PieChartSectionData(
+          value: 35,
+          color: Colors.blue,
+          title: '35%',
+          radius: 50,
+          titleStyle: const TextStyle(color: Colors.white),
+        ),
+        PieChartSectionData(
+          value: 25,
+          color: Colors.green,
+          title: '25%',
+          radius: 50,
+          titleStyle: const TextStyle(color: Colors.white),
+        ),
+        PieChartSectionData(
+          value: 20,
+          color: Colors.orange,
+          title: '20%',
+          radius: 50,
+          titleStyle: const TextStyle(color: Colors.white),
+        ),
+        PieChartSectionData(
+          value: 20,
+          color: Colors.purple,
+          title: '20%',
+          radius: 50,
+          titleStyle: const TextStyle(color: Colors.white),
+        ),
+      ],
+      sectionsSpace: 2,
+      centerSpaceRadius: 40,
+    );
+  }
 }
