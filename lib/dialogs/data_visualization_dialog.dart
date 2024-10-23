@@ -3,10 +3,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/rendering.dart';
 import 'dart:typed_data';
-import 'dart:io' if (dart.library.html) 'dart:html' as html;
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'dart:html' as html;
+
+// Conditional import for dart:html
+import 'dart:html' as html show Blob, Url, AnchorElement;
 
 class DataVisualizationDialog {
   static void showDataVisualizationDialog(BuildContext context) {
@@ -216,7 +217,7 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
           // Clean up
           html.Url.revokeObjectUrl(url);
         } else {
-          // Fallback for other platforms
+          // Handle non-web export logic here (if needed)
           throw UnsupportedError(
               'Exporting charts is not supported on this platform.');
         }
