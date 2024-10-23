@@ -36,6 +36,12 @@ class VoiceInputDialog {
                     fontWeight: FontWeight.bold,
                     color: Colors.blueAccent,
                   ),
+              title: const Text(
+                "Voice Input",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
                 ),
               ),
               content: Column(
