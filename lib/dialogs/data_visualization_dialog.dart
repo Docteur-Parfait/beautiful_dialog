@@ -3,8 +3,10 @@ import 'package:fl_chart/fl_chart.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/rendering.dart';
 import 'dart:typed_data';
-import 'dart:html' as html;
+import 'dart:io' show Platform;
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:html' as html;
 
 class DataVisualizationDialog {
   static void showDataVisualizationDialog(BuildContext context) {
@@ -200,17 +202,24 @@ class _DataVisualizationContentState extends State<DataVisualizationContent> {
 
       if (byteData != null) {
         final Uint8List pngBytes = byteData.buffer.asUint8List();
-        final blob = html.Blob([pngBytes], 'image/png');
-        final url = html.Url.createObjectUrlFromBlob(blob);
+        if (kIsWeb) {
+          // Check if the platform is web
+          final blob = html.Blob([pngBytes], 'image/png');
+          final url = html.Url.createObjectUrlFromBlob(blob);
 
-        // Create an anchor element and trigger a download
-        final anchor = html.AnchorElement(href: url)
-          ..setAttribute(
-              'download', 'chart_${DateTime.now().millisecondsSinceEpoch}.png')
-          ..click();
+          // Create an anchor element and trigger a download
+          final anchor = html.AnchorElement(href: url)
+            ..setAttribute('download',
+                'chart_${DateTime.now().millisecondsSinceEpoch}.png')
+            ..click();
 
-        // Clean up
-        html.Url.revokeObjectUrl(url);
+          // Clean up
+          html.Url.revokeObjectUrl(url);
+        } else {
+          // Handle non-web export logic here (if needed)
+          throw UnsupportedError(
+              'Exporting charts is not supported on this platform.');
+        }
 
         // Show success message using bot_toast
         BotToast.showText(
