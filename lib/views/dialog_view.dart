@@ -1,4 +1,5 @@
 import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
+import 'package:beautiful_dialog/dialogs/data_visualization_dialog.dart';
 import 'package:beautiful_dialog/dialogs/gamified_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
@@ -218,6 +219,13 @@ class _DialogViewState extends State<DialogView> {
                   onConfirm: () {},
                   onCancel: () {},
                 ),
+              ),
+              CustomButton(
+                text: "Data Visualization Dialog",
+                author: "Tech Apostle",
+                onTap: () =>
+                    DataVisualizationDialog.showDataVisualizationDialog(
+                        context),
               ),
               CustomButton(
                 text: "Widget Tour Dialog",
