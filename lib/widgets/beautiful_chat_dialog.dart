@@ -82,18 +82,40 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerPr
       "Hello! 😊 Wonderful to see you!",
       "Hi friend! 🌟 What brings you here today?",
       "Greetings! 🎉 Hope you're having a fantastic day!",
+      "Hiya! 👋 What's up?",
+      "Hey! 😃 How's everything?",
     ],
     'how_are_you': [
       "I'm doing great, thanks for asking! 😊 How about you?",
       "Living my best digital life! 🌟 You?",
       "Feeling energetic and ready to chat! ⚡ How are you?",
       "Just perfect! 🎯 Hope you're having a wonderful day too!",
+      "I'm fantastic! 😄 How are you doing?",
+      "Couldn't be better! 😁 How about yourself?",
     ],
     'name': [
       "I'm Tech Apostle! 🚀 Nice to meet you!",
       "They call me Tech Apostle - your friendly neighborhood chat assistant! 😎",
       "Tech Apostle at your service! 🌟",
       "The name's Apostle, Tech Apostle! 🎯",
+      "I'm your friendly AI, Tech Apostle! 🤖",
+      "Tech Apostle here, ready to assist! 🛠️",
+    ],
+    'favorite_color': [
+      "I love all colors, but blue is quite calming! 💙",
+      "Green is the color of life! 🌿 What's yours?",
+      "Red is so vibrant and full of energy! ❤️",
+      "Yellow is like a burst of sunshine! 🌞",
+      "Purple is so royal and majestic! 👑",
+      "Orange is warm and inviting! 🍊",
+    ],
+    'weather': [
+      "I hope it's sunny where you are! ☀️",
+      "Rainy days are perfect for coding! 🌧️",
+      "Snow is so magical! ❄️",
+      "I love a good thunderstorm! ⛈️",
+      "Clear skies are the best! 🌤️",
+      "Cloudy days have their own charm! ☁️",
     ],
   };
 
@@ -103,7 +125,15 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerPr
     "🚀", "💫", "⭐", "🌟", "✨", "💡", "🎯", "🎨",
     "🌈", "🎭", "🎪", "🎠", "🎡", "🎢", "🎪", "🎭",
     "🌺", "🌸", "🌼", "🌻", "🌹", "🍀", "🌿", "🌴",
-    "💖", "💝", "💕", "💓", "💗", "💞", "💘", "💟"
+    "💖", "💝", "💕", "💓", "💗", "💞", "💘", "💟",
+    "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂",
+    "🙃", "😉", "😊", "😇", "🥳", "🤩", "😋", "😜",
+    "🤪", "😝", "🤑", "🤗", "🤭", "🤫", "🤔", "🤐",
+    "🤨", "😐", "😑", "😶", "😏", "😒", "🙄", "😬",
+    "🤥", "😌", "😔", "😪", "🤤", "😴", "😷", "🤒",
+    "🤕", "🤢", "🤮", "🤧", "😵", "🤯", "🤠", "🥳",
+    "🥺", "🤓", "🧐", "😎", "🤡", "🥸", "😈", "👿",
+    "👹", "👺", "💀", "☠️", "👻", "👽", "👾", "🤖",
   ];
 
   @override
@@ -157,6 +187,10 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerPr
         responseType = 'how_are_you';
       } else if (messageText.contains('your name') || messageText.contains("who are you")) {
         responseType = 'name';
+      } else if (messageText.contains('favorite color')) {
+        responseType = 'favorite_color';
+      } else if (messageText.contains('weather')) {
+        responseType = 'weather';
       }
 
       Future.delayed(const Duration(seconds: 2), () {
