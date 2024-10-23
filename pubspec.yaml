@@ -37,6 +37,7 @@ dependencies:
   url_launcher: ^6.3.0
   provider: ^6.1.2
   gap: ^3.0.1
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
