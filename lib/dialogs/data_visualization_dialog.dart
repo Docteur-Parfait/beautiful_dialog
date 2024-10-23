@@ -9,10 +9,8 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 // Conditional import for platform-specific export functionality
-import 'provider/web_export_provider.dart'
-    if (dart.library.html) 'provider/web_export_provider.dart' as webExport;
-import 'provider/mobile_export_provider.dart'
-    if (dart.library.io) 'provider/mobile_export_provider.dart' as mobileExport;
+import 'provider/web_export_provider.dart' as webExport;
+import 'provider/mobile_export_provider.dart' as mobileExport;
 
 class DataVisualizationDialog {
   static void showDataVisualizationDialog(BuildContext context) {
