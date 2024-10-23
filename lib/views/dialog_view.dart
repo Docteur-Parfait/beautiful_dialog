@@ -126,7 +126,7 @@ class _DialogViewState extends State<DialogView> {
               ),
               CustomButton(
                   text: "Feedback dialog",
-                  author: "prosmaw",
+                  author: "Prosmaw",
                   onTap: () => FeedbackDialog.showFeedbackDialog(context)),
               CustomButton(
                 text: "Switch theme alert",
@@ -234,6 +234,10 @@ class _DialogViewState extends State<DialogView> {
                   }
                 },
               ),
+              CustomButton(
+                  text: "Avatar picker dialog",
+                  author: "Prosmaw",
+                  onTap: () => AvatarPicker.showAvatarPickerDialog(context)),
             ],
           ),
         ),
