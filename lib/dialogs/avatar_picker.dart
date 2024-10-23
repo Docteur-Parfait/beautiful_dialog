@@ -1,10 +1,10 @@
-import 'package:beautiful_dialog/widgets/feedback_dialog_content.dart';
+import 'package:beautiful_dialog/widgets/avatar_picker/dialog_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 
-class GravityDialog {
+class AvatarPicker {
   //Feedback Dialog
-  static void showGravityDialog(BuildContext context) {
+  static void showAvatarPickerDialog(BuildContext context) {
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
@@ -15,9 +15,11 @@ class GravityDialog {
           backgroundColor: Colors.white,
           actionsAlignment: MainAxisAlignment.center,
           titlePadding: const EdgeInsets.only(left: 20, top: 20),
-          title: const Text(
-            "Give us your feedback",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          title: const Center(
+            child: Text(
+              "Choose a disc",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
           ),
           actions: [
             ElevatedButton(
@@ -25,16 +27,16 @@ class GravityDialog {
                   Navigator.of(context).pop();
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 0, 122, 255),
+                    backgroundColor: const Color.fromARGB(255, 23, 23, 26),
                     fixedSize: const Size(310, 47),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
                 child: const Text(
-                  "Submit",
+                  "Save",
                   style: TextStyle(color: Colors.white),
                 ))
           ],
-          content: const FeedbackDialogContent(),
+          content: const DialogContent(),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         );
