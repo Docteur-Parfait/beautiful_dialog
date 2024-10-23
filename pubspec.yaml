@@ -43,6 +43,8 @@ dependencies:
   wave: ^0.2.2
   fl_chart: ^0.69.0
   flutter_svg: ^2.0.10+1
+  share_plus: ^10.1.1
+  path_provider: ^2.1.4
 
 dev_dependencies:
   flutter_test:
