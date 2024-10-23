@@ -9,14 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
-  audio_waveforms:
-    dependency: "direct main"
-    description:
-      name: audio_waveforms
-      sha256: a86b271488cef1833bf1c379edf68e884b68f0911d62d48c397175b76c862387
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   audioplayers:
     dependency: "direct main"
     description:
