@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:intl/intl.dart';
+import 'dart:math';
 
 class ChatMessage {
   final String text;
   final bool isMe;
   final DateTime timestamp;
   final String? attachmentUrl;
-  
+  final bool isAnimated;
+  final String? reactionEmoji;
+
   ChatMessage({
     required this.text,
     required this.isMe,
     required this.timestamp,
     this.attachmentUrl,
+    this.isAnimated = false,
+    this.reactionEmoji,
   });
 }
 
@@ -24,11 +28,11 @@ class BeautifulChatDialog extends StatefulWidget {
   final String otherUserAvatar;
 
   const BeautifulChatDialog({
-    Key? key,
+    super.key,
     required this.title,
     required this.otherUserName,
     required this.otherUserAvatar,
-  }) : super(key: key);
+  });
 
   static void show(BuildContext context, {
     required String title,
@@ -61,16 +65,55 @@ class BeautifulChatDialog extends StatefulWidget {
   State<BeautifulChatDialog> createState() => _BeautifulChatDialogState();
 }
 
-class _BeautifulChatDialogState extends State<BeautifulChatDialog> {
+class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerProviderStateMixin {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   final List<ChatMessage> _messages = [];
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   bool _isTyping = false;
   bool _showEmoji = false;
+  late AnimationController _bounceController;
+  final Random _random = Random();
+
+  // Dynamic Response System
+  final Map<String, List<String>> _responses = {
+    'greeting': [
+      "Hey there! 👋 How's your day going?",
+      "Hello! 😊 Wonderful to see you!",
+      "Hi friend! 🌟 What brings you here today?",
+      "Greetings! 🎉 Hope you're having a fantastic day!",
+    ],
+    'how_are_you': [
+      "I'm doing great, thanks for asking! 😊 How about you?",
+      "Living my best digital life! 🌟 You?",
+      "Feeling energetic and ready to chat! ⚡ How are you?",
+      "Just perfect! 🎯 Hope you're having a wonderful day too!",
+    ],
+    'name': [
+      "I'm Tech Apostle! 🚀 Nice to meet you!",
+      "They call me Tech Apostle - your friendly neighborhood chat assistant! 😎",
+      "Tech Apostle at your service! 🌟",
+      "The name's Apostle, Tech Apostle! 🎯",
+    ],
+  };
+
+  // Extended emoji list
+  final List<String> _emojis = [
+    "😊", "😂", "🥰", "😍", "😎", "🤔", "😅", "👍",
+    "🚀", "💫", "⭐", "🌟", "✨", "💡", "🎯", "🎨",
+    "🌈", "🎭", "🎪", "🎠", "🎡", "🎢", "🎪", "🎭",
+    "🌺", "🌸", "🌼", "🌻", "🌹", "🍀", "🌿", "🌴",
+    "💖", "💝", "💕", "💓", "💗", "💞", "💘", "💟"
+  ];
 
   @override
   void initState() {
     super.initState();
+    _bounceController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
     // Add some sample messages
     _messages.addAll([
       ChatMessage(
@@ -89,48 +132,71 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> {
   void _sendMessage() {
     if (_messageController.text.trim().isEmpty) return;
 
+    final messageText = _messageController.text.toLowerCase();
+    final currentMessage = ChatMessage(
+      text: _messageController.text,
+      isMe: true,
+      timestamp: DateTime.now(),
+    );
+
     setState(() {
-      _messages.add(ChatMessage(
-        text: _messageController.text,
-        isMe: true,
-        timestamp: DateTime.now(),
-      ));
+      _messages.add(currentMessage);
       _messageController.clear();
       _showEmoji = false;
+      _listKey.currentState?.insertItem(_messages.length - 1);
     });
 
-    // Simulate received message
-    Future.delayed(const Duration(seconds: 1), () {
+    // Generate response based on message content
+    Future.delayed(const Duration(milliseconds: 500), () {
       setState(() {
         _isTyping = true;
       });
-      
+
+      String responseType = 'greeting';
+      if (messageText.contains('how are you')) {
+        responseType = 'how_are_you';
+      } else if (messageText.contains('your name') || messageText.contains("who are you")) {
+        responseType = 'name';
+      }
+
       Future.delayed(const Duration(seconds: 2), () {
+        final response = _getRandomResponse(responseType);
         setState(() {
           _isTyping = false;
-          _messages.add(ChatMessage(
-            text: "That's great! 😊",
+          final responseMessage = ChatMessage(
+            text: response,
             isMe: false,
             timestamp: DateTime.now(),
-          ));
+            isAnimated: true,
+          );
+          _messages.add(responseMessage);
+          _listKey.currentState?.insertItem(_messages.length - 1);
         });
         _scrollToBottom();
+        _bounceController.forward().then((_) => _bounceController.reverse());
       });
     });
 
     _scrollToBottom();
   }
 
+  String _getRandomResponse(String type) {
+    final responses = _responses[type] ?? ['Hello!'];
+    return responses[_random.nextInt(responses.length)];
+  }
+
   Future<void> _pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
       setState(() {
-        _messages.add(ChatMessage(
+        final message = ChatMessage(
           text: "Sent an attachment",
           isMe: true,
           timestamp: DateTime.now(),
           attachmentUrl: result.files.single.name,
-        ));
+        );
+        _messages.add(message);
+        _listKey.currentState?.insertItem(_messages.length - 1);
       });
       _scrollToBottom();
     }
@@ -184,13 +250,22 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      child: ListView.builder(
+                      child: AnimatedList(
+                        key: _listKey,
                         controller: _scrollController,
                         padding: const EdgeInsets.all(16),
-                        itemCount: _messages.length,
-                        itemBuilder: (context, index) {
+                        initialItemCount: _messages.length,
+                        itemBuilder: (context, index, animation) {
                           final message = _messages[index];
-                          return _buildMessageBubble(message);
+                          return SlideTransition(
+                            position: animation.drive(
+                              Tween<Offset>(
+                                begin: const Offset(0, 1),
+                                end: Offset.zero,
+                              ).chain(CurveTween(curve: Curves.easeInOut)),
+                            ),
+                            child: _buildMessageBubble(message),
+                          );
                         },
                       ),
                     ),
@@ -361,12 +436,11 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> {
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 8,
                 ),
-                itemCount: 32,
+                itemCount: _emojis.length,
                 itemBuilder: (context, index) {
-                  final emojis = ["😊", "😂", "🥰", "😍", "😎", "🤔", "😅", "👍"];
                   return GestureDetector(
                     onTap: () {
-                      _messageController.text += emojis[index % emojis.length];
+                      _messageController.text += _emojis[index];
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -375,7 +449,7 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> {
                       ),
                       alignment: Alignment.center,
                       child: Text(
-                        emojis[index % emojis.length],
+                        _emojis[index],
                         style: const TextStyle(fontSize: 24),
                       ),
                     ),
