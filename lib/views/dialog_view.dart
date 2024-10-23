@@ -1,4 +1,5 @@
 import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
+import 'package:beautiful_dialog/dialogs/gamified_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
@@ -108,6 +109,11 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
+                text: "Gamified Dialog",
+                author: "Tech Apostle",
+                onTap: () => GamifiedDialog.showGamifiedDialog(context),
+              ),
+              CustomButton(
                 text: "Expanding alert",
                 author: "littleDarkBug",
                 onTap: () => ExpandingDialogClass.showExpandingDialog(
@@ -198,7 +204,7 @@ class _DialogViewState extends State<DialogView> {
               ),
               CustomButton(
                 text: "Voice Input Dialog",
-                author: "TechApostle",
+                author: "Tech Apostle",
                 onTap: () => VoiceInputDialog.showVoiceInputDialog(context),
               ),
               CustomButton(
