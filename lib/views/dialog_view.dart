@@ -1,5 +1,7 @@
 import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
+import 'package:beautiful_dialog/dialogs/card_swiper_dialog.dart';
 import 'package:beautiful_dialog/dialogs/data_visualization_dialog.dart';
+import 'package:beautiful_dialog/dialogs/event_card_swiper_dialog.dart';
 import 'package:beautiful_dialog/dialogs/gamified_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
@@ -221,11 +223,22 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
+                text: "Event Cards Dialog",
+                author: "Tech Apostle",
+                onTap: () =>
+                    EventCardSwiperDialog.showEventCardSwiperDialog(context),
+              ),
+              CustomButton(
                 text: "Data Visualization Dialog",
                 author: "Tech Apostle",
                 onTap: () =>
                     DataVisualizationDialog.showDataVisualizationDialog(
                         context),
+              ),
+              CustomButton(
+                text: "Card Swiper Dialog",
+                author: "Tech Apostle",
+                onTap: () => CardSwiperDialog.showCardSwiperDialog(context),
               ),
               CustomButton(
                 text: "Widget Tour Dialog",
