@@ -6,16 +6,20 @@ class EventData {
   final String subtitle;
   final String description;
   final String time;
-  final String distance;
+  final String date;
+  final String location;
   final String imageUrl;
+  final Color primaryColor;
 
   EventData({
     required this.title,
     required this.subtitle,
     required this.description,
     required this.time,
-    required this.distance,
+    required this.date,
+    required this.location,
     required this.imageUrl,
+    required this.primaryColor,
   });
 }
 
@@ -49,9 +53,8 @@ class EventCardSwiperDialogContent extends StatefulWidget {
 class _EventCardSwiperDialogContentState
     extends State<EventCardSwiperDialogContent> {
   late final CardSwiperController controller;
-  late final List<EventData> events;
+  late List<EventData> events;
   bool isExpanded = false;
-  int currentIndex = 0;
 
   @override
   void initState() {
@@ -59,52 +62,83 @@ class _EventCardSwiperDialogContentState
     controller = CardSwiperController();
     events = [
       EventData(
+        title: 'Payaza Fintech Connect',
+        subtitle: 'Diving into the Fintech space',
+        description:
+            'Join industry leaders and innovators for a deep dive into the future of financial technology. Explore trends, challenges, and opportunities in the African fintech ecosystem.',
+        date: 'October 25',
+        time: '9:00 AM',
+        location: 'Cedi Conference Centre',
+        imageUrl: 'assets/fintech.jpg',
+        primaryColor: const Color(0xFF6B4EE6),
+      ),
+      EventData(
+        title: 'APP & PIZZA',
+        subtitle:
+            'Developing with excellence: Best practices in the development progress',
+        description:
+            'A casual meetup combining coding and pizza! Share development best practices, network with fellow developers, and enjoy some delicious pizza while discussing the latest in app development.',
+        date: 'October 25',
+        time: '6:00 PM',
+        location: 'Spado Hub',
+        imageUrl: 'assets/apppizza.jpg',
+        primaryColor: const Color(0xFFE64E4E),
+      ),
+      EventData(
+        title: 'Film Creativity Action',
+        subtitle: 'Exploring Creative Filmmaking',
+        description:
+            'A two-day immersive experience in creative filmmaking. Learn from industry experts, participate in workshops, and network with fellow creators in the beautiful settings of Legon Botanical Gardens.',
+        date: 'October 25-26',
+        time: '10:00 AM',
+        location: 'Legon Botanical Gardens',
+        imageUrl: 'assets/film.jpg',
+        primaryColor: const Color(0xFF4EA1E6),
+      ),
+      EventData(
+        title: 'Flutter Ghana',
+        subtitle:
+            'Building a Successful Global Flutter SaaS App from anywhere in the world',
+        description:
+            'Join the Flutter Ghana community for an intensive workshop on building scalable SaaS applications with Flutter. Learn about global best practices and how to succeed in the international market.',
+        date: 'October 26',
+        time: '9:00 AM - 2:00 PM',
+        location: 'Stanbic Incubator',
+        imageUrl: 'assets/flutter.jpg',
+        primaryColor: const Color(0xFF4ECDE6),
+      ),
+      EventData(
+        title: 'ICP Meet up Togo',
+        subtitle: "Explorer l'avenir de l'Internet décentralisé",
+        description:
+            "Participez au premier ICP Meetup Togo pour découvrir comment le protocole Internet Computer (ICP) peut transformer l'infrastructure internet et promouvoir une économie numérique décentralisée en Afrique.",
+        date: 'October 26',
+        time: '8:00 AM - 1:00 PM',
+        location: 'Agora Senghor, Lomé-Togo',
+        imageUrl: 'assets/icp.jpg',
+        primaryColor: const Color(0xFF4EE6B9),
+      ),
+      EventData(
         title: 'Hacktoberfest',
         subtitle: 'Global Open Source Celebration',
-        description: 'Join the month-long celebration of open source software. Contribute to projects, earn swag, and connect with developers worldwide.',
+        description:
+            'Join the month-long celebration of open source software. Contribute to projects, earn swag, and connect with developers worldwide.',
+        date: 'October',
         time: '10:00 AM - 6:00 PM',
-        distance: '2.5 km',
+        location: 'Virtual & Local Meetups',
         imageUrl: 'assets/hacktoberfest.jpg',
+        primaryColor: const Color(0xFFE64E8B),
       ),
       EventData(
         title: 'Devfest',
         subtitle: 'Google Developer Groups Conference',
-        description: 'Annual tech conference featuring the latest in Android, Web, and Cloud technologies. Network with experts and learn about cutting-edge developments.',
+        description:
+            'Annual tech conference featuring the latest in Android, Web, and Cloud technologies. Network with experts and learn about cutting-edge developments.',
+        date: 'November 4',
         time: '9:00 AM - 5:00 PM',
-        distance: '3.8 km',
+        location: 'Accra International Conference Centre',
         imageUrl: 'assets/devfest.jpg',
-      ),
-      EventData(
-        title: 'Pycon Africa',
-        subtitle: 'Pan-African Python Conference',
-        description: 'The largest Python conference in Africa. Join workshops, talks, and sprints focused on Python development and its applications in AI/ML.',
-        time: '8:30 AM - 4:30 PM',
-        distance: '5.2 km',
-        imageUrl: 'assets/pycon.jpg',
-      ),
-      EventData(
-        title: 'Google I/O',
-        subtitle: 'Annual Developer Conference',
-        description: 'Google\'s flagship developer conference showcasing the latest innovations in Android, AI, Cloud, and more. Experience hands-on labs and technical sessions.',
-        time: '11:00 AM - 7:00 PM',
-        distance: '4.1 km',
-        imageUrl: 'assets/googleio.jpg',
-      ),
-      EventData(
-        title: 'ICP Meet up Togo',
-        subtitle: 'Internet Computer Protocol Community',
-        description: 'Join the ICP community in Togo to discuss blockchain technology, decentralized applications, and the future of web3 development.',
-        time: '2:00 PM - 6:00 PM',
-        distance: '1.3 km',
-        imageUrl: 'assets/icp.jpg',
-      ),
-      EventData(
-        title: 'AWS Community Day',
-        subtitle: 'Cloud Computing Excellence',
-        description: 'A day of learning and sharing about Amazon Web Services. Deep dive into serverless, containers, and cloud architecture best practices.',
-        time: '9:30 AM - 5:30 PM',
-        distance: '3.0 km',
-        imageUrl: 'assets/aws.jpg',
+        primaryColor: const Color(0xFF4EE665),
       ),
     ];
   }
@@ -127,8 +161,8 @@ class _EventCardSwiperDialogContentState
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 8,
+              color: data.primaryColor.withOpacity(0.2),
+              blurRadius: 12,
               offset: const Offset(0, 4),
             ),
           ],
@@ -145,17 +179,25 @@ class _EventCardSwiperDialogContentState
                   image: DecorationImage(
                     image: AssetImage(data.imageUrl),
                     fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      data.primaryColor.withOpacity(0.1),
+                      BlendMode.overlay,
+                    ),
                   ),
                 ),
               ),
             ),
             Container(
               width: double.infinity,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(15),
                   bottomRight: Radius.circular(15),
+                ),
+                border: Border.all(
+                  color: data.primaryColor.withOpacity(0.1),
+                  width: 1,
                 ),
               ),
               child: Column(
@@ -168,9 +210,10 @@ class _EventCardSwiperDialogContentState
                       children: [
                         Text(
                           data.title,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            color: data.primaryColor,
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -185,7 +228,10 @@ class _EventCardSwiperDialogContentState
                     ),
                   ),
                   if (isExpanded) ...[
-                    const Divider(height: 1),
+                    Divider(
+                      height: 1,
+                      color: data.primaryColor.withOpacity(0.2),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
@@ -196,37 +242,64 @@ class _EventCardSwiperDialogContentState
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.grey[800],
+                              height: 1.5,
                             ),
                           ),
                           const SizedBox(height: 16),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  Icon(Icons.access_time,
-                                      color: Colors.grey[600]),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    data.time,
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.access_time,
+                                        color: data.primaryColor, size: 18),
+                                    const SizedBox(width: 4),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            data.date,
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: data.primaryColor,
+                                            ),
+                                          ),
+                                          Text(
+                                            data.time,
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                              color: Colors.grey[600],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                              Row(
-                                children: [
-                                  Icon(Icons.location_on,
-                                      color: Colors.grey[600]),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    data.distance,
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
+                              Expanded(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Icon(Icons.location_on,
+                                        color: data.primaryColor, size: 18),
+                                    const SizedBox(width: 4),
+                                    Expanded(
+                                      child: Text(
+                                        data.location,
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          color: Colors.grey[600],
+                                        ),
+                                        textAlign: TextAlign.right,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -246,42 +319,75 @@ class _EventCardSwiperDialogContentState
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       child: Container(
         padding: const EdgeInsets.all(16),
         width: 400,
         height: 600,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
         child: Column(
           children: [
-            const Text(
-              'Tech Events Near You',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+            const SizedBox(height: 20),
+            Container(
+              decoration: const BoxDecoration(
+                // Removed gradient and set a solid color
+                color: Colors.white,
+              ),
+              child: const Text(
+                'Event Cards',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
               ),
             ),
             const SizedBox(height: 20),
             Expanded(
               child: events.isEmpty
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.event_busy,
-                            size: 64,
-                            color: Colors.grey[400],
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'No more events',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.grey[600],
-                              fontWeight: FontWeight.w500,
+                  ? Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[50],
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.event_busy,
+                              size: 64,
+                              color: Colors.grey[400],
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 16),
+                            Text(
+                              'No more events',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.grey[600],
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Check back later for new events',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey[400],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   : CardSwiper(
@@ -293,9 +399,7 @@ class _EventCardSwiperDialogContentState
                       },
                       onSwipe: (previousIndex, currentIndex, direction) {
                         setState(() {
-                          if (currentIndex == null) {
-                            events.removeAt(previousIndex);
-                          }
+                          events.removeAt(previousIndex);
                           isExpanded = false;
                         });
                         return true;
@@ -312,26 +416,38 @@ class _EventCardSwiperDialogContentState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton.icon(
-                  onPressed: () => controller.swipe(CardSwiperDirection.left),
+                  onPressed: events.isEmpty
+                      ? null
+                      : () => controller.swipe(CardSwiperDirection.left),
                   icon: const Icon(Icons.close),
                   label: const Text('Decline'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.red[400],
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 2,
                   ),
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton.icon(
-                  onPressed: () => controller.swipe(CardSwiperDirection.right),
+                  onPressed: events.isEmpty
+                      ? null
+                      : () => controller.swipe(CardSwiperDirection.right),
                   icon: const Icon(Icons.check),
                   label: const Text('Accept'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.green[400],
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 2,
                   ),
                 ),
               ],
