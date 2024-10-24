@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'dart:math';
 
 class CardData {
   final String title;
@@ -24,7 +25,7 @@ class CardSwiperDialog extends StatelessWidget {
     );
   }
 
-  const CardSwiperDialog({Key? key}) : super(key: key);
+  const CardSwiperDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +34,17 @@ class CardSwiperDialog extends StatelessWidget {
 }
 
 class CardSwiperDialogContent extends StatefulWidget {
-  const CardSwiperDialogContent({Key? key}) : super(key: key);
+  const CardSwiperDialogContent({super.key});
 
   @override
-  State<CardSwiperDialogContent> createState() => _CardSwiperDialogContentState();
+  State<CardSwiperDialogContent> createState() =>
+      _CardSwiperDialogContentState();
 }
 
 class _CardSwiperDialogContentState extends State<CardSwiperDialogContent> {
   late final CardSwiperController controller;
   late final List<CardData> cards;
+  final Random random = Random();
 
   @override
   void initState() {
@@ -49,27 +52,51 @@ class _CardSwiperDialogContentState extends State<CardSwiperDialogContent> {
     controller = CardSwiperController();
     cards = [
       CardData(
-        title: 'Five, 5',
-        subtitle: 'Manager\nTown',
+        title: 'Innovation',
+        subtitle: 'Embrace new ideas and technologies.',
         gradientColors: [
           const Color(0xFFFF4B6B),
           const Color(0xFFFF8B9E),
         ],
       ),
       CardData(
-        title: 'Three, 3',
-        subtitle: 'Manager\nTown',
+        title: 'Teamwork',
+        subtitle: 'Collaborate and achieve together.',
         gradientColors: [
           const Color(0xFF4BC0FF),
           const Color(0xFF80D8FF),
         ],
       ),
       CardData(
-        title: 'Four, 4',
-        subtitle: 'Manager\nTown',
+        title: 'Excellence',
+        subtitle: 'Strive for the best in everything you do.',
         gradientColors: [
           const Color(0xFF4BFF9F),
           const Color(0xFF80FFB4),
+        ],
+      ),
+      CardData(
+        title: 'Integrity',
+        subtitle: 'Act with honesty and transparency.',
+        gradientColors: [
+          const Color(0xFFFFD700),
+          const Color(0xFFFFE135),
+        ],
+      ),
+      CardData(
+        title: 'Creativity',
+        subtitle: 'Think outside the box and innovate.',
+        gradientColors: [
+          const Color(0xFF8A2BE2),
+          const Color(0xFFBA55D3),
+        ],
+      ),
+      CardData(
+        title: 'Passion',
+        subtitle: 'Put your heart into your work.',
+        gradientColors: [
+          const Color(0xFFFF4500),
+          const Color(0xFFFF6347),
         ],
       ),
     ];
@@ -137,6 +164,11 @@ class _CardSwiperDialogContentState extends State<CardSwiperDialogContent> {
     );
   }
 
+  CardSwiperDirection _getRandomDirection() {
+    const directions = CardSwiperDirection.values;
+    return directions[random.nextInt(directions.length)];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -159,7 +191,8 @@ class _CardSwiperDialogContentState extends State<CardSwiperDialogContent> {
               child: CardSwiper(
                 controller: controller,
                 cardsCount: cards.length,
-                cardBuilder: (context, index, horizontalThreshold, verticalThreshold) {
+                cardBuilder:
+                    (context, index, horizontalThreshold, verticalThreshold) {
                   return _buildCard(cards[index]);
                 },
                 onSwipe: (previousIndex, currentIndex, direction) {
@@ -167,7 +200,10 @@ class _CardSwiperDialogContentState extends State<CardSwiperDialogContent> {
                 },
                 numberOfCardsDisplayed: 3,
                 backCardOffset: const Offset(25, 15),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                scale: 0.9,
+                duration: const Duration(milliseconds: 300),
               ),
             ),
             const SizedBox(height: 20),
