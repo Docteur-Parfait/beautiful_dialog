@@ -45,6 +45,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   share_plus: ^10.1.1
   path_provider: ^2.1.4
+  flutter_card_swiper: ^7.0.2
 
 dev_dependencies:
   flutter_test:
