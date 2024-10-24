@@ -223,7 +223,7 @@ class _DialogViewState extends State<DialogView> {
                 ),
               ),
               CustomButton(
-                text: "Events Card Dialog",
+                text: "Event Cards Dialog",
                 author: "Tech Apostle",
                 onTap: () =>
                     EventCardSwiperDialog.showEventCardSwiperDialog(context),
