@@ -140,6 +140,39 @@ class _EventCardSwiperDialogContentState
         imageUrl: 'assets/devfest.jpg',
         primaryColor: const Color(0xFF4EE665),
       ),
+      EventData(
+        title: 'Pycon Africa',
+        subtitle: 'Pan-African Python Conference',
+        description:
+            'The largest Python conference in Africa. Join workshops, talks, and sprints focused on Python development and its applications in AI/ML.',
+        time: '8:30 AM - 4:30 PM',
+        date: 'TBD', 
+        location: 'Lomé-Togo', 
+        imageUrl: 'assets/pycon.jpg',
+        primaryColor: const Color.fromARGB(255, 152, 48, 145),
+      ),
+      EventData(
+        title: 'Google I/O',
+        subtitle: 'Annual Developer Conference',
+        description:
+            'Google\'s flagship developer conference showcasing the latest innovations in Android, AI, Cloud, and more. Experience hands-on labs and technical sessions.',
+        time: '11:00 AM - 7:00 PM',
+        date: 'May 24',
+        location: 'Amphitheatre, Mountain View', 
+        imageUrl: 'assets/googleio.jpg',
+        primaryColor: const Color(0xFF4285F4), 
+      ),
+      EventData(
+        title: 'AWS Community Day',
+        subtitle: 'Cloud Computing Excellence',
+        description:
+            'A day of learning and sharing about Amazon Web Services. Deep dive into serverless, containers, and cloud architecture best practices.',
+        time: '9:30 AM - 5:30 PM',
+        date: 'August 3', 
+        location: 'Snow City, Bangalore', 
+        imageUrl: 'assets/aws.jpg',
+        primaryColor: const Color.fromARGB(255, 187, 0, 56), 
+      ),
     ];
   }
 
@@ -283,7 +316,7 @@ class _EventCardSwiperDialogContentState
                               ),
                               Expanded(
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Icon(Icons.location_on,
                                         color: data.primaryColor, size: 18),
@@ -295,7 +328,7 @@ class _EventCardSwiperDialogContentState
                                           fontSize: 11,
                                           color: Colors.grey[600],
                                         ),
-                                        textAlign: TextAlign.right,
+                                        textAlign: TextAlign.start, 
                                       ),
                                     ),
                                   ],
@@ -340,7 +373,6 @@ class _EventCardSwiperDialogContentState
             const SizedBox(height: 20),
             Container(
               decoration: const BoxDecoration(
-                // Removed gradient and set a solid color
                 color: Colors.white,
               ),
               child: const Text(
