@@ -16,3 +16,4 @@ export "loading_dialog.dart";
 export "tutorial_dialog.dart";
 export "widget_tour_dialog.dart";
 export "avatar_picker.dart";
+export "save_file_dialog.dart";

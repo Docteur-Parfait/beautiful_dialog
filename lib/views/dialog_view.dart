@@ -4,6 +4,7 @@ import 'package:beautiful_dialog/dialogs/feedback_dialogbox.dart';
 import 'package:beautiful_dialog/dialogs/gamified_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
+import 'package:beautiful_dialog/dialogs/save_file_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
 import 'package:beautiful_dialog/dialogs/timer_dialog.dart';
 import 'package:beautiful_dialog/dialogs/voice_input_dialog.dart';
@@ -76,6 +77,13 @@ class _DialogViewState extends State<DialogView> {
           padding: const EdgeInsets.all(12.0),
           child: Wrap(
             children: [
+              CustomButton(
+                text: "Save File Dialog",
+                author: "Mohamed Al-Samarai",
+                onTap: () => SaveFileDialog.showSaveFileDialog(
+                  context,
+                ),
+              ),
               CustomButton(
                 text: "Yes or No confirmation",
                 author: "Tech Pastor",
@@ -265,9 +273,13 @@ class _DialogViewState extends State<DialogView> {
                   text: "Avatar picker dialog",
                   author: "Prosmaw",
                   onTap: () => AvatarPicker.showAvatarPickerDialog(context)),
-              CustomButton(text: "Feedback feelings dialog", author: "Nisarg Shah",onTap: () {
-                FeedbackDialogBox.showFeedbackDialogs(context, message: "hi");
-              },)
+              CustomButton(
+                text: "Feedback feelings dialog",
+                author: "Nisarg Shah",
+                onTap: () {
+                  FeedbackDialogBox.showFeedbackDialogs(context, message: "hi");
+                },
+              )
             ],
           ),
         ),
