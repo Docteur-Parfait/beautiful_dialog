@@ -105,7 +105,8 @@ class FeedbackDialogBox {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 15), backgroundColor: Colors.green,
+                        horizontal: 30, vertical: 15),
+                    backgroundColor: Colors.green,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                   ),
