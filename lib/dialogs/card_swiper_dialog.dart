@@ -175,8 +175,8 @@ class _CardSwiperDialogContentState extends State<CardSwiperDialogContent> {
       backgroundColor: Colors.white,
       child: Container(
         padding: const EdgeInsets.all(16),
-        width: 400, 
-        height: 600, 
+        width: 400,
+        height: 600,
         child: Column(
           children: [
             const Text(
