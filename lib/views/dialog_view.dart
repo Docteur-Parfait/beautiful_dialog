@@ -276,9 +276,13 @@ class _DialogViewState extends State<DialogView> {
                   text: "Avatar picker dialog",
                   author: "Prosmaw",
                   onTap: () => AvatarPicker.showAvatarPickerDialog(context)),
-              CustomButton(text: "Feedback feelings dialog", author: "Nisarg Shah",onTap: () {
-                FeedbackDialogBox.showFeedbackDialogs(context, message: "hi");
-              },)
+              CustomButton(
+                text: "Feedback feelings dialog",
+                author: "Nisarg Shah",
+                onTap: () {
+                  FeedbackDialogBox.showFeedbackDialogs(context, message: "hi");
+                },
+              )
             ],
           ),
         ),
