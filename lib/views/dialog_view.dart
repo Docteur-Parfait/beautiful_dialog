@@ -2,12 +2,14 @@ import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/card_swiper_dialog.dart';
 import 'package:beautiful_dialog/dialogs/data_visualization_dialog.dart';
 import 'package:beautiful_dialog/dialogs/event_card_swiper_dialog.dart';
+import 'package:beautiful_dialog/dialogs/feedback_dialogbox.dart';
 import 'package:beautiful_dialog/dialogs/gamified_dialog.dart';
 import 'package:beautiful_dialog/dialogs/discard_changes_dialog.dart';
 import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
 import 'package:beautiful_dialog/dialogs/timer_dialog.dart';
 import 'package:beautiful_dialog/dialogs/voice_input_dialog.dart';
+import 'package:beautiful_dialog/widgets/beautiful_chat_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -227,6 +229,15 @@ class _DialogViewState extends State<DialogView> {
                 author: "Tech Apostle",
                 onTap: () =>
                     EventCardSwiperDialog.showEventCardSwiperDialog(context),
+                text: "Beautiful Chat Dialog",
+                author: "Tech Apostle",
+                onTap: () => BeautifulChatDialog.show(
+                  context,
+                  title: "Chat with Tech Apostle",
+                  otherUserName: "Tech Apostle",
+                  otherUserAvatar:
+                      "https://raw.githubusercontent.com/Jossyboydgenius/Jossyboydgenius/9b2800c3d119ba94b19947539bd61281a737e035/avatar.jpeg",
+                ),
               ),
               CustomButton(
                 text: "Data Visualization Dialog",
@@ -265,6 +276,9 @@ class _DialogViewState extends State<DialogView> {
                   text: "Avatar picker dialog",
                   author: "Prosmaw",
                   onTap: () => AvatarPicker.showAvatarPickerDialog(context)),
+              CustomButton(text: "Feedback feelings dialog", author: "Nisarg Shah",onTap: () {
+                FeedbackDialogBox.showFeedbackDialogs(context, message: "hi");
+              },)
             ],
           ),
         ),
