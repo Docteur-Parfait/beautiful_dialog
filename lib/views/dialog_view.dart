@@ -7,6 +7,7 @@ import 'package:beautiful_dialog/dialogs/multistep_dialog.dart';
 import 'package:beautiful_dialog/dialogs/stacked_dialog.dart';
 import 'package:beautiful_dialog/dialogs/timer_dialog.dart';
 import 'package:beautiful_dialog/dialogs/voice_input_dialog.dart';
+import 'package:beautiful_dialog/widgets/beautiful_chat_dialog.dart';
 import 'package:beautiful_dialog/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -219,6 +220,17 @@ class _DialogViewState extends State<DialogView> {
                   message: "Are you sure you want to proceed with this action?",
                   onConfirm: () {},
                   onCancel: () {},
+                ),
+              ),
+              CustomButton(
+                text: "Beautiful Chat Dialog",
+                author: "Tech Apostle",
+                onTap: () => BeautifulChatDialog.show(
+                  context,
+                  title: "Chat with Tech Apostle",
+                  otherUserName: "Tech Apostle",
+                  otherUserAvatar:
+                      "https://raw.githubusercontent.com/Jossyboydgenius/Jossyboydgenius/9b2800c3d119ba94b19947539bd61281a737e035/avatar.jpeg",
                 ),
               ),
               CustomButton(
