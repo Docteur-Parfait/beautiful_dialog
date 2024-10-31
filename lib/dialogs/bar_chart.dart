@@ -56,10 +56,10 @@ class BarChartWidgetState extends State<BarChartWidget> {
                 const SizedBox(
                   height: 4,
                 ),
-                Text(
+                const Text(
                   'Coding Time Chart',
                   style: TextStyle(
-                    color: AppColors.contentColorGreen.darken(),
+                    color: AppColors.contentColorWhite,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -203,7 +203,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
                 TextSpan(
                   text: (rod.toY - 1).toString(),
                   style: const TextStyle(
-                    color: Colors.white, //widget.touchedBarColor,
+                    color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
