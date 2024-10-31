@@ -71,7 +71,7 @@ class AnimatedConfirmationDialog {
                           Text(
                             message,
                             style: const TextStyle(
-                              fontSize: 18.0,
+                              fontSize: 14.0, // Adjusted font size
                               color: Colors.white,
                             ),
                             textAlign: TextAlign.center,
@@ -117,7 +117,10 @@ class AnimatedConfirmationDialog {
                                     vertical: 10.0,
                                   ),
                                 ),
-                                child: const Text('Confirm'),
+                                child: const Text(
+                                  'Confirm',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ],
                           ),
