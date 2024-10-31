@@ -244,8 +244,8 @@ class _DialogViewState extends State<DialogView> {
                 text: "Animated Chart",
                 author: "Tech Apostle",
                 onTap: () => ChartDialog.showChartDialog(
-                context,
-                title: "Weekly Stats",
+                  context,
+                  title: "Analytics Dashboard",
                 ),
               ),
               CustomButton(
