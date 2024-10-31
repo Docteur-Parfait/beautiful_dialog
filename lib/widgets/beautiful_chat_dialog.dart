@@ -34,14 +34,16 @@ class BeautifulChatDialog extends StatefulWidget {
     required this.otherUserAvatar,
   });
 
-  static void show(BuildContext context, {
+  static void show(
+    BuildContext context, {
     required String title,
     required String otherUserName,
     required String otherUserAvatar,
   }) {
     showGeneralDialog(
       context: context,
-      pageBuilder: (context, animation, secondaryAnimation) => BeautifulChatDialog(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          BeautifulChatDialog(
         title: title,
         otherUserName: otherUserName,
         otherUserAvatar: otherUserAvatar,
@@ -65,7 +67,8 @@ class BeautifulChatDialog extends StatefulWidget {
   State<BeautifulChatDialog> createState() => _BeautifulChatDialogState();
 }
 
-class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerProviderStateMixin {
+class _BeautifulChatDialogState extends State<BeautifulChatDialog>
+    with TickerProviderStateMixin {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   final List<ChatMessage> _messages = [];
@@ -121,19 +124,110 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerPr
 
   // Extended emoji list
   final List<String> _emojis = [
-    "😊", "😂", "🥰", "😍", "😎", "🤔", "😅", "👍",
-    "🚀", "💫", "⭐", "🌟", "✨", "💡", "🎯", "🎨",
-    "🌈", "🎭", "🎪", "🎠", "🎡", "🎢", "🎪", "🎭",
-    "🌺", "🌸", "🌼", "🌻", "🌹", "🍀", "🌿", "🌴",
-    "💖", "💝", "💕", "💓", "💗", "💞", "💘", "💟",
-    "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂",
-    "🙃", "😉", "😊", "😇", "🥳", "🤩", "😋", "😜",
-    "🤪", "😝", "🤑", "🤗", "🤭", "🤫", "🤔", "🤐",
-    "🤨", "😐", "😑", "😶", "😏", "😒", "🙄", "😬",
-    "🤥", "😌", "😔", "😪", "🤤", "😴", "😷", "🤒",
-    "🤕", "🤢", "🤮", "🤧", "😵", "🤯", "🤠", "🥳",
-    "🥺", "🤓", "🧐", "😎", "🤡", "🥸", "😈", "👿",
-    "👹", "👺", "💀", "☠️", "👻", "👽", "👾", "🤖",
+    "😊",
+    "😂",
+    "🥰",
+    "😍",
+    "😎",
+    "🤔",
+    "😅",
+    "👍",
+    "🚀",
+    "💫",
+    "⭐",
+    "🌟",
+    "✨",
+    "💡",
+    "🎯",
+    "🎨",
+    "🌈",
+    "🎭",
+    "🎪",
+    "🎠",
+    "🎡",
+    "🎢",
+    "🎪",
+    "🎭",
+    "🌺",
+    "🌸",
+    "🌼",
+    "🌻",
+    "🌹",
+    "🍀",
+    "🌿",
+    "🌴",
+    "💖",
+    "💝",
+    "💕",
+    "💓",
+    "💗",
+    "💞",
+    "💘",
+    "💟",
+    "😃",
+    "😄",
+    "😁",
+    "😆",
+    "😅",
+    "🤣",
+    "😂",
+    "🙂",
+    "🙃",
+    "😉",
+    "😊",
+    "😇",
+    "🥳",
+    "🤩",
+    "😋",
+    "😜",
+    "🤪",
+    "😝",
+    "🤑",
+    "🤗",
+    "🤭",
+    "🤫",
+    "🤔",
+    "🤐",
+    "🤨",
+    "😐",
+    "😑",
+    "😶",
+    "😏",
+    "😒",
+    "🙄",
+    "😬",
+    "🤥",
+    "😌",
+    "😔",
+    "😪",
+    "🤤",
+    "😴",
+    "😷",
+    "🤒",
+    "🤕",
+    "🤢",
+    "🤮",
+    "🤧",
+    "😵",
+    "🤯",
+    "🤠",
+    "🥳",
+    "🥺",
+    "🤓",
+    "🧐",
+    "😎",
+    "🤡",
+    "🥸",
+    "😈",
+    "👿",
+    "👹",
+    "👺",
+    "💀",
+    "☠️",
+    "👻",
+    "👽",
+    "👾",
+    "🤖",
   ];
 
   @override
@@ -185,7 +279,8 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerPr
       String responseType = 'greeting';
       if (messageText.contains('how are you')) {
         responseType = 'how_are_you';
-      } else if (messageText.contains('your name') || messageText.contains("who are you")) {
+      } else if (messageText.contains('your name') ||
+          messageText.contains("who are you")) {
         responseType = 'name';
       } else if (messageText.contains('favorite color')) {
         responseType = 'favorite_color';
@@ -270,7 +365,7 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerPr
             children: [
               // Chat Header
               _buildHeader(),
-              
+
               // Messages List
               Expanded(
                 child: Stack(
@@ -380,7 +475,7 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerPr
 
   Widget _buildMessageBubble(ChatMessage message) {
     final time = DateFormat('HH:mm').format(message.timestamp);
-    
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
@@ -395,8 +490,9 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerPr
             const SizedBox(width: 8),
           ],
           Column(
-            crossAxisAlignment:
-                message.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            crossAxisAlignment: message.isMe
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
             children: [
               BubbleSpecialThree(
                 text: message.text,
@@ -413,7 +509,8 @@ class _BeautifulChatDialogState extends State<BeautifulChatDialog> with TickerPr
               if (message.attachmentUrl != null)
                 Container(
                   margin: const EdgeInsets.only(top: 4),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
                     color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(12),
