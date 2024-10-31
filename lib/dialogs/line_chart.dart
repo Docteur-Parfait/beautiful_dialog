@@ -31,7 +31,7 @@ class LineChartWidgetState extends State<LineChartWidget> {
                 height: 37,
               ),
               const Text(
-                'Monthly Sales',
+                'Monthly Coding Hours',
                 style: TextStyle(
                   color: AppColors.primary,
                   fontSize: 32,
