@@ -273,6 +273,11 @@ class _DialogViewState extends State<DialogView> {
                   text: "Avatar picker dialog",
                   author: "Prosmaw",
                   onTap: () => AvatarPicker.showAvatarPickerDialog(context)),
+              CustomButton(
+                text: "Save file dialog",
+                author: "Mohamed Al-Samrai",
+                onTap: () => SaveFileDialog.showSaveFileDialog(context),
+              ),
             ],
           ),
         ),
