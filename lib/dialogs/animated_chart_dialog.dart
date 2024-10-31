@@ -1,8 +1,7 @@
-import 'dart:ui';
-import 'package:beautiful_dialog/dialogs/app_colors.dart';
 import 'package:beautiful_dialog/dialogs/bar_chart.dart';
 import 'package:beautiful_dialog/dialogs/pie_chart.dart';
 import 'package:beautiful_dialog/dialogs/line_chart.dart';
+import 'package:beautiful_dialog/dialogs/radar_chart.dart';
 import 'package:flutter/material.dart';
 
 class ChartDialog {
@@ -78,7 +77,9 @@ class _ChartDialogContentState extends State<ChartDialogContent> {
                   ? BarChartWidget()
                   : selectedChart == 'pie'
                       ? const PieChartWidget()
-                      : const LineChartWidget(),
+                      : selectedChart == 'line'
+                          ? const LineChartWidget()
+                          : RadarChartWidget(),
             ),
             const SizedBox(height: 20),
             Row(
@@ -101,6 +102,10 @@ class _ChartDialogContentState extends State<ChartDialogContent> {
                     DropdownMenuItem(
                       value: 'line',
                       child: Text('Line Chart'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'radar',
+                      child: Text('Radar Chart'),
                     ),
                   ],
                   onChanged: (value) {
