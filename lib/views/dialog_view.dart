@@ -1,3 +1,4 @@
+import 'package:beautiful_dialog/dialogs/animated_chart_dialog.dart';
 import 'package:beautiful_dialog/dialogs/animated_confirmation_dialog.dart';
 import 'package:beautiful_dialog/dialogs/data_visualization_dialog.dart';
 import 'package:beautiful_dialog/dialogs/gamified_dialog.dart';
@@ -238,6 +239,14 @@ class _DialogViewState extends State<DialogView> {
                 onTap: () =>
                     DataVisualizationDialog.showDataVisualizationDialog(
                         context),
+              ),
+              CustomButton(
+                text: "Animated Chart",
+                author: "Your Name",
+                onTap: () => ChartDialog.showChartDialog(
+                context,
+                title: "Weekly Stats",
+                ),
               ),
               CustomButton(
                 text: "Widget Tour Dialog",
