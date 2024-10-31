@@ -54,7 +54,7 @@ class _ChartDialogContentState extends State<ChartDialogContent> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [Colors.blueAccent, Colors.purpleAccent],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -77,8 +77,8 @@ class _ChartDialogContentState extends State<ChartDialogContent> {
               child: selectedChart == 'bar'
                   ? BarChartWidget()
                   : selectedChart == 'pie'
-                      ? PieChartWidget()
-                      : LineChartWidget(),
+                      ? const PieChartWidget()
+                      : const LineChartWidget(),
             ),
             const SizedBox(height: 20),
             Row(

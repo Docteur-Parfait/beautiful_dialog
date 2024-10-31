@@ -167,7 +167,7 @@ class PingPongDialogContentState extends State<PingPongDialogContent> {
   @override
   void dispose() {
     // Cancel the timer when the widget is disposed
-    gameTimer!.cancel();
+    gameTimer.cancel();
     super.dispose();
   }
 
