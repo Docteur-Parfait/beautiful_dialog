@@ -158,7 +158,17 @@ class GamifiedDialog {
               ),
               actions: [
                 TextButton(
-                  child: const Text("Close"),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.redAccent,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                      vertical: 10.0,
+                    ),
+                  ),
+                  child: const Text(
+                    "Close",
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () {
                     timer?.cancel();
                     stopBackgroundMusic();
