@@ -14,19 +14,6 @@ class GamifiedDialog {
     AudioPlayer audioPlayer = AudioPlayer();
     AudioPlayer backgroundMusicPlayer = AudioPlayer();
 
-    void startTimer(Function setState) {
-      timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        setState(() {
-          if (timeLeft > 0) {
-            timeLeft--;
-          } else {
-            timer.cancel();
-            BotToast.showText(text: "Time's up!");
-          }
-        });
-      });
-    }
-
     void playSound(String sound) {
       audioPlayer.play(AssetSource(sound));
     }
@@ -38,6 +25,157 @@ class GamifiedDialog {
 
     void stopBackgroundMusic() {
       backgroundMusicPlayer.stop();
+    }
+
+    void startTimer(Function setState) {
+      timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        setState(() {
+          if (timeLeft > 0) {
+            timeLeft--;
+          } else {
+            timer.cancel();
+            stopBackgroundMusic();
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  title: const Center(
+                    child: Text(
+                      "Time's Up!",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontFamily: 'CustomFont',
+                      ),
+                    ),
+                  ),
+                  content: const Text(
+                    "Would you like to try again?",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontFamily: 'CustomFont',
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  actions: [
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                          vertical: 10.0,
+                        ),
+                      ),
+                      child: const Text(
+                        "Close",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                      ),
+                      child: const Text(
+                        "Try Again",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                        startTimer(setState);
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        });
+      });
+    }
+
+    void showTryAgainDialog(BuildContext context, Function setState) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            title: const Center(
+              child: Text(
+                "Time's Up!",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontFamily: 'CustomFont',
+                ),
+              ),
+            ),
+            content: const Text(
+              "Would you like to try again?",
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontFamily: 'CustomFont',
+              ),
+              textAlign: TextAlign.center,
+            ),
+            actions: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                    vertical: 10.0,
+                  ),
+                ),
+                child: const Text(
+                  "Close",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                },
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                    vertical: 10.0,
+                  ),
+                ),
+                child: const Text(
+                  "Try Again",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  setState(() {
+                    score = 0;
+                    targetNumber = Random().nextInt(10) + 1;
+                    timeLeft = 30;
+                    startTimer(setState);
+                    playBackgroundMusic();
+                  });
+                },
+              ),
+            ],
+          );
+        },
+      );
     }
 
     showDialog(
