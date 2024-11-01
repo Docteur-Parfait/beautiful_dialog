@@ -110,9 +110,11 @@ class GamifiedDialog {
                           fontFamily: 'CustomFont'),
                     ),
                     const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: List.generate(5, (index) {
+                    Wrap(
+                      spacing: 8.0,
+                      runSpacing: 8.0,
+                      alignment: WrapAlignment.center,
+                      children: List.generate(10, (index) {
                         return ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.green,
@@ -131,48 +133,6 @@ class GamifiedDialog {
                           ),
                           onPressed: () {
                             if (index + 1 == targetNumber) {
-                              setState(() {
-                                score++;
-                                if (score > highestScore) {
-                                  highestScore = score;
-                                }
-                                targetNumber = Random().nextInt(10) + 1;
-                                timeLeft = 30;
-                              });
-                              playSound('correct.ogg');
-                              BotToast.showText(
-                                  text: "Correct! New number generated.");
-                            } else {
-                              playSound('wrong.ogg');
-                              BotToast.showText(
-                                  text: "Wrong guess. Try again!");
-                            }
-                          },
-                        );
-                      }),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: List.generate(5, (index) {
-                        return ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 16),
-                          ),
-                          child: Text(
-                            "${index + 6}",
-                            style: const TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontFamily: 'CustomFont'),
-                          ),
-                          onPressed: () {
-                            if (index + 6 == targetNumber) {
                               setState(() {
                                 score++;
                                 if (score > highestScore) {
