@@ -26,7 +26,7 @@ class FeedbackDialogBox {
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Title
-                Text(
+                const Text(
                   "How are you feeling?",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -35,7 +35,7 @@ class FeedbackDialogBox {
                 Text(
                   message,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14, color: Colors.black54),
+                  style: const TextStyle(fontSize: 14, color: Colors.black54),
                 ),
                 const SizedBox(height: 20),
                 // Feelings row
@@ -94,7 +94,7 @@ class FeedbackDialogBox {
                 // Comment section
                 TextField(
                   controller: commentController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Add a Comment...",
                     border: OutlineInputBorder(),
                   ),
@@ -116,7 +116,7 @@ class FeedbackDialogBox {
                     print("Comment: ${commentController.text}");
                     Navigator.pop(context); // Close dialog
                   },
-                  child: Text("Submit Now"),
+                  child: const Text("Submit Now"),
                 ),
               ],
             ),

@@ -7,7 +7,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/rendering.dart';
 import 'dart:typed_data';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class DataVisualizationDialog {
   static void showDataVisualizationDialog(BuildContext context) {
