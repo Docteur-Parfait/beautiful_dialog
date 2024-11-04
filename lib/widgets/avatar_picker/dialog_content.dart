@@ -37,6 +37,7 @@ class _DialogContentState extends State<DialogContent>
 
   int currentId = -1;
   int lastId = -1;
+  bool isInit = false;
 
   @override
   void initState() {
@@ -47,7 +48,14 @@ class _DialogContentState extends State<DialogContent>
           contentKey.currentContext!.findRenderObject() as RenderBox;
 
       setState(() {
+        //Get the dialog content box size since there is no width specified
         contentSize = contentBox.size;
+      });
+
+      Future.delayed(const Duration(milliseconds: 800), () {
+        setState(() {
+          isInit = true;
+        });
       });
     });
   }
@@ -105,19 +113,27 @@ class _DialogContentState extends State<DialogContent>
                   ),
                 ),
                 ...List.generate(discs.length, (index) {
+                  //get the position of each disc for proper grid layout
                   final row = index ~/ 2;
                   final column = index % 2;
 
+                  //disc container width
                   double boxWidth = unChosedRaduis * 2;
 
+                  //top spacing for all discs except first column
                   double colSpacing = column == 0 ? 20 : 30;
+                  //left spacing for all discs except first rown
                   double rowSpacing = row == 0 ? 0 : 10;
+                  //position of the (0,0) disc for a well centered display
                   double firstLeft = (contentSize.width -
-                          ((boxWidth + 10) * 3) -
+                          ((boxWidth + 10) * 2) -
+                          boxWidth -
                           (horizontalPadding * 2)) /
                       2;
 
+                  //default left position
                   double defLeft = (row * (boxWidth + rowSpacing));
+                  //default top position
                   double defTop =
                       (column * boxWidth) + chosedAvatarH + colSpacing;
 
@@ -130,7 +146,8 @@ class _DialogContentState extends State<DialogContent>
                   if (currentId == index) {
                     leftTween = Tween<double>(
                             begin: defLeft + firstLeft,
-                            //15 is padding - space between the avatar and the container parent of the avatar
+                            //15 is padding - space between the avatar
+                            //and the container parent of the avatar
                             end: (contentSize.width / 2) -
                                 (chosedAvatarH / 2) -
                                 15)
@@ -172,12 +189,20 @@ class _DialogContentState extends State<DialogContent>
                           });
                         }
                       },
-                      child: SvgPicture.asset(
-                        fit: BoxFit.fill,
-                        allowDrawingOutsideViewBox: true,
-                        discs[index],
+                      child: SizedBox(
                         width: boxSizeTween.value,
                         height: boxSizeTween.value,
+                        child: AnimatedOpacity(
+                          duration: const Duration(milliseconds: 200),
+                          opacity: isInit ? 1 : 0,
+                          child: SvgPicture.asset(
+                            fit: BoxFit.fill,
+                            allowDrawingOutsideViewBox: true,
+                            discs[index],
+                            width: boxSizeTween.value,
+                            height: boxSizeTween.value,
+                          ),
+                        ),
                       ),
                     ),
                   );
