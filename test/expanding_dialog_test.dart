@@ -3,45 +3,53 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+/// Tests the ExpandingButtonDialog in DialogView for correct display and interaction.
 void main() {
-  testWidgets('ExpandingButtonDialog displays correctly',
+  testWidgets('ExpandingButtonDialog displays and responds as expected',
       (WidgetTester tester) async {
-    // Define the message to be passed to the dialog
-    const testMessage = 'Try to close it on the first try.';
+    // The message shown within the dialog after expansion.
+    const dialogMessage = 'Try to close it on the first try.';
 
-    // Build the dialog widget
-    await tester.pumpWidget(MaterialApp(
-      title: 'Flutter Dialogs ',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.green, foregroundColor: Colors.white),
-        useMaterial3: true,
-      ),
-      home: const DialogView(),
-    ));
+    // Build the test app with DialogView as the home screen.
+    await tester.pumpWidget(
+      MaterialApp(
+        title: 'Flutter Dialogs',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
+          ),
+          useMaterial3: true,
+        ),
+        home: const DialogView(),
+      )
+    );
 
-    // Tap the button to show the dialog
+    // Tap the button to display the expanding dialog
     await tester.tap(find.text('Expanding alert'));
-    await tester.pumpAndSettle(); // Wait for the dialog to appear
+    await tester.pumpAndSettle(); // Wait for dialog animation to finish
 
-    // Verify if the dialog is displayed
+    // Assert: Dialog window is shown
     expect(find.byType(Dialog), findsOneWidget);
+
+    // Assert: Dialog contains expected widgets and text
     expect(find.text('You got it!'), findsOneWidget);
-    expect(find.text(testMessage), findsOneWidget);
+    expect(find.text(dialogMessage), findsOneWidget);
     expect(find.text('Done'), findsOneWidget);
 
-    // Verify if the cursor changes to hand on hover
-    await tester.sendEventToBinding(
-      const PointerHoverEvent(
-        position: Offset(200, 200),
-      ),
-    );
+    // Simulate hover to check cursor effect
+    await tester.sendEventToBinding(const PointerHoverEvent(
+      position: Offset(200, 200),
+    ));
     await tester.pumpAndSettle();
 
-    // Close the dialog
+    // Tap the 'Done' button to close the dialog
     await tester.tap(find.text('Done'));
-    await tester.pumpAndSettle(); // Wait for the dialog to close
+    await tester.pumpAndSettle();
+    
+    // Assert: Dialog is no longer displayed
+    expect(find.byType(Dialog), findsNothing);
   });
 }
