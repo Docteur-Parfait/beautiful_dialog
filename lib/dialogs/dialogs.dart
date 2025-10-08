@@ -7,6 +7,7 @@ export "notif_dialog.dart";
 export "ok_confirmation_dialog.dart";
 export 'paiement_dialog.dart';
 export "ping_pong_dialog.dart";
+export "progress_dialog.dart";
 export "succes_dialog.dart";
 export "switch_theme_dialog.dart";
 export "warning_alert.dart";
