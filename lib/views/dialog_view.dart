@@ -188,6 +188,31 @@ class _DialogViewState extends State<DialogView> {
                     message: "Loading..."),
               ),
               CustomButton(
+                text: "Progress Dialog",
+                author: "HordRic",
+                onTap: () => ProgressDialog.showProgressDialog(
+                  context,
+                  title: "Processing Tasks",
+                  tasks: [
+                    "Initializing system",
+                    "Loading resources",
+                    "Connecting to server",
+                    "Fetching data",
+                    "Finalizing setup"
+                  ],
+                  autoProgress: true,
+                  progressDuration: const Duration(seconds: 10),
+                  onComplete: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("All tasks completed successfully!"),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              CustomButton(
                 text: "Tutorial dialog",
                 author: "LeScientifique",
                 onTap: () => TutorialDialog.showTutorialDialog(context, steps: [
